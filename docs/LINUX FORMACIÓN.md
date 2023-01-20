@@ -300,3 +300,79 @@ unzip archivo_comprimido.zip
 #zip "nombre archivo comprimido" "ruta archivo o carpeta a comprimir"
 unzip -l archivo_comprimido.zip
 ```
+
+# GESTION DE PERMISOS
+
+Se establecen en 3 bloques **usuario - grupo - otros**  
+
+```shell 
+Usuario  Grupo  Otros
+rwx      rwx    r-x
+```
+
+Cada uno de los bloques cuenta con 8 bits de estado :
+- 0 -> sin acceso ---  
+- 1-> ejecución --x  
+- 2-> escritura -w-  
+- 3-> escritura y ejecución -wx  
+- 4-> lectura r--  
+- 5 -> lectura y ejecución r-xls  
+- 6 -> lectura y escritura -> rw-  
+- 7 -> lectura, escritura y ejecución -> rwx  
+  
+## - UMASK  
+
+Son los permisos que se otorgan por defecto al crear ficheros y direcctorios. Se definen los  que no se van a dar, se calculan los que se van a dar restandolos del completo  
+
+**OJO!!**-> no tiene en cuenta el permiso de ejecución 
+  
+Lo podemos modificar de manera persistente en:  
+```shell
+$HOME/.profile  
+/etc/profile  
+/etc/login.defs  
+```
+- Para ficheros:  
+	- 666 - umask (0002) -> 664  
+  
+- Para directorios  
+	- 777 - umask (0002) -> 775
+
+- Para poder hacer cd en un directorio, éste tiene que tener permiso de ejecución
+  
+## - Manejo de Permisos:  
+- chmod -> Cambio de permisos sobre un fichero o directorio  
+	- -r -> recursivo, aplica a subdirectorios y ficheros dentro del directorio  
+	- -v -> verbose  
+	- +x -> permiso de ejecución  
+
+- chown -> cambio de propietario de un archivo o directorio
+	- -c -> muestra la información de los directorios y ficheros donde se han cambiado los permisos
+
+```shell
+#cambia el usuario propietario de archivo.txt
+chown root /ruta/archivo.txt
+#cambia el usuario y grupo para archivo.txt
+chown root:web /var/home/archivo.txt
+#cambia el usuario propietario de los directorios y ficheros dentro de home
+chown -R root /var/home  
+```
+  
+**OJO!!** -> la opción -R no modifica el propietario de la ruta en la que te encuentras, modifica el propietario de los ficheros de este directorio y los directorios internos pero no la carpeta padre.  
+
+- chgrp -> cambiamos el grupo del fichero o directorio  
+	- -c -> muestra la información de los directorios y ficheros donde se han cambiado los permisos 
+
+```shell
+#cambia el grupo del archivo ejemplo.txt
+chgrp root ejemplo.txt
+#cambiar grupo a directorios y ficheros dentro de home
+chgrp -R root /etc
+```
+  
+OJO!!! -> la opción -R no modifica el propietario de la ruta en la que te encuentras, modifica el propietario de los ficheros de este directorio y los directorios internos pero no la carpeta padre.  
+  
+
+## - Añadir usuario y grupos
+
+adduser o useradd -> buscar distribución, varía en función del sistema operativo  
