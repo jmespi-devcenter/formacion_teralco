@@ -242,7 +242,7 @@ URL DE REFERENCIA: [https://apunteimpensado.com/guia-empezar-vim-linux/](https:/
 
 # GESTIÓN DE ERRORES
 
-## STDIN , STDOUT, STDERR  
+## Stdin , Stdout, Stderr  
 --------------------------------------------  
 Son las entradas y salidas del sistema, se representan con 0, 1 y 2 respectivamente  
 - stdin-> se corresponde con el 0 y es la entrada estándar. Por lo general, la entrada de datos estándar es el teclado. Es decir, lo que tecleas será la información usada. Tiene un dispositivo especial asociado que es /dev/stdin.
@@ -320,7 +320,7 @@ Cada uno de los bloques cuenta con 8 bits de estado :
 - 6 -> lectura y escritura -> rw-  
 - 7 -> lectura, escritura y ejecución -> rwx  
   
-## - UMASK  
+## - Umask
 
 Son los permisos que se otorgan por defecto al crear ficheros y direcctorios. Se definen los  que no se van a dar, se calculan los que se van a dar restandolos del completo  
 

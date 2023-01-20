@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Untitled.md",
+                "file": "LINUX FORMACIÓN.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Untitled.md",
+                "file": "LINUX FORMACIÓN.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Untitled.md",
+                "file": "LINUX FORMACIÓN.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Untitled.md"
+                "file": "LINUX FORMACIÓN.md"
               }
             }
           }
@@ -148,8 +148,8 @@
   },
   "active": "ec660355990a377c",
   "lastOpenFiles": [
-    "LINUX FORMACIÓN.md",
     "Untitled.md",
+    "LINUX FORMACIÓN.md",
     "SCRIPTING EN BASH.md"
   ]
 }
