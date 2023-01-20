@@ -1,4 +1,4 @@
-## COMANDOS DE SISTEMA
+# COMANDOS DE SISTEMA
 
 Listamos los comandos de sistemas más comunes
 
@@ -25,15 +25,15 @@ Historial de comandos utilizados
 history
 ```
 
-Con **$ + número** de comando mostrado en el historial volvemos a lanzar su ejecución
+Con **! + número** de comando mostrado en el historial volvemos a lanzar su ejecución
 
-### Shell
+## - Shell
 
 Podemos visualizar la shell por defecto en el fichero /etc/passwd, por defecto utilizaremos bash. Si modificamos el archivo passwd podemos decidir cual es nuestra terminal por defecto.
 
 Las consolas disponibles en el sistema nos aparecen en /etc/shells
 
-### Listado de ficheros y directorios
+## - Listado de ficheros y directorios
 
 El comando utilizado será **ls**
 
@@ -61,7 +61,7 @@ Argumentos ls
 - R recursivo  
 - h 
 
-### Alias
+## - Alias
 - Crear alias
 ```shell
 alias bcat=batcat
@@ -74,7 +74,7 @@ unalias bcat
 - Crear alias de manera permanente
 	- /home/"user"/.bashrc -> editamos el fichero y añadimos el alias (solo para el usuario donde se realice la modificación)
 
-### Grep
+## - Grep
 
 Este comando sirve para filtrar el valor devuelto por otro comando, generalmente se utiliza junto a otro comando precedido de pipe |
 
@@ -89,34 +89,59 @@ Ejemplo
 ```shell
 grep -inv linea1 prueba.txt  
 ```
-  
-### Procesos completar documentación
-ps -> procesos de tu terminal  
-  
-ps -ef -> todos los procesos  
-  
-ps -ef | grep "" -> para buscar servicios en todos los procesos  
+
+## - Pipe
+
+
+
+
+
+## - Procesos
+
+- ps -> procesos de tu terminal  
+- ps -ef -> todos los procesos  
+- ps -u user -> procesos del usuario
+- ps -p id ->muestra procesos con un id
+- ps -C nombre_proceso -> muestra procesos por nombre
+- ps -ef | grep "" -> para buscar servicios en todos los procesos  
   
 TOP  
-ver procesos, por defecto ordenados por uso de CPU  
+Ver procesos, por defecto ordenados por uso de CPU  
+ - top -d segundos -> reflesca los procesos cada x segundos
+
+Para ordenar la tabla tenemos los siguientes flags  
   
-Para ordenar tenemos los siguientes flags  
+- P -> ordenar por CPU  
+- N -> ordenar por PID  
+- M -> ordenar por Memoria  
+- T -> ordenar por tiempo  
   
-P -> ordenar por CPU  
-N -> ordenar por PID  
-M -> ordenar por Memoria  
-T -> ordenar por tiempo  
+Pulsando **xb** destacamos la columna por la que se esta ordenando  
   
-Pulsando xb destacamos la columna por la que se esta ordenando  
-  
-Para poder eliminar el proceso pulsamos k y escribimos el nº de pid  
-  
-también podemos eliminar con kill -9 "pid"  
+Podemos eliminar un proceso pulsando **k** y escribimos el **nº de pid** , de igual manera también podemos eliminar con **kill -9 "pid"**  
   
 URL CON MÁS INFORMACIÓN: [https://geekland.eu/usar-entender-monitor-de-recursos-top/](https://geekland.eu/usar-entender-monitor-de-recursos-top/)  
-## EDICIÓN DE CARACTERES
+FREE  
+- free -th -> muestra información de la memoria completo  
+  
+COMANDOS DE ESPACIO  
+- df -> disk free  
+- du -> disk used  
+- du -sh * | sort -hr | head -5 -> muestra los 5 directorios más ocupados ordenados de mayor a menor  
 
-### SED
+## - Redes
+- hostname -i -> información de la ip del equipo a nivel de DNS  
+- netstat -pltn -> que puertos están en escucha en el equipo
+- ip route show -> muestra información de la tabla de rutas  
+- mostrar el GW -> ip route show | grep "default via" | awk {'print $3'}  
+- mostrar IP del dns -> cat /etc/resolv.conf | grep "nameserver" | awk {'print $2'}  
+- Para consultar nuestra ip pública podemos utilizar una de estas opciones
+	- curl [ifconfig.com](http://ifconfig.com/)
+	- wget -qO - [ifconfig.co](http://ifconfig.co/)  
+  
+# EDICIÓN DE CARACTERES
+
+## - Sed
 
 Este comando se utiliza para reemplazar carácteres. Si no se utiliza la opción **-i** la modificación **SOLO** se realizará en pantalla
 
@@ -155,17 +180,123 @@ cat /etc/shells | sed -e 's/bin/b/g' -e 's/usr/u/g' -e 's/bash/b/g' -e 's/dash/d
 URL CON MÁS INFORMACIÓN
 [https://geekland.eu/uso-del-comando-sed-en-linux-y-unix-con-ejemplos/](https://geekland.eu/uso-del-comando-sed-en-linux-y-unix-con-ejemplos/)  
 
-### CUT COMPLETAR DOCUMENTACIÓN
+## - Cut
 
-Muestra caracteres del contenido de los ficheros  
+Su principal utilidad es la de borrar secciones, campos o caracteres de la salida de un comando o de cada una de las líneas de un fichero de texto.  
+
+```shell
+#Muestra el caracter número 4 de cada línea del fichero / 
+cut -c 4 fichero 
+#el 4 y el 5
+cut -c 4,5 fichero
+# del 4 al 6
+cut -c 4-6 fichero
+#Muestra el tercer elemento utilizando como delimitador el "espacio"
+echo "estoy escribiendo una línea" | cut -d ' ' -f3
+```
+
 URL CON MÁS INFORMACIÓN: [https://geekland.eu/uso-del-comando-cut-en-linux-y-unix-con-ejemplos/](https://geekland.eu/uso-del-comando-cut-en-linux-y-unix-con-ejemplos/)  
   
-### AWK COMPLETAR DOCUMENTACIÓN
+## - Awk
 
-realiza algo parecido a cut pero mucho más dinámico y completo  
-  
+Los usos básicos que podemos dar al comando Awk son los siguientes:
+- Buscar palabras y patrones de palabras y reemplazarlos por otras palabras y/o patrones.
+- Hacer operaciones matemáticas.
+- Procesar texto y mostrar las líneas y columnas que cumplen con determinadas condiciones.
+
+Algunos de los parámetros que podemos utilizar son:
+- -F -> establecer el delimitador
+
+```shell
+#Muestra una columna determinada de la salida del comando “ps”
+ps | awk '{print $num_columna}'
+#Extrae la columna “num_colum” del fichero “/etc/passwd” usando como delimitador de columnas “delimitador”
+cat /etc/passwd | awk -F ":" '{print $1}'
+```
+
 URL CON MÁS INFORMACIÓN: [https://geekland.eu/uso-del-comando-awk-en-linux-y-unix-con-ejemplos/](https://geekland.eu/uso-del-comando-awk-en-linux-y-unix-con-ejemplos/)  
+
+# EDICIÓN DE TEXTO
+
+Mostramos algunos de los comandos más útiles del edito Vi/Vim
+- :q! -> salir sin guardar  
+- :wq -> guardar y salir  
+- gg -> ir al inicio  
+- G -> ir al final  
+- y -> copiar (linea en vim, caracter en vi)  
+- Y -> copiar linea en vi  
+- d -> cortar  
+- p -> pegar  
+- u -> desacer  
+- dd - > borrar la línea  
+- x -> borrar caracter  
+- $ -> ir al final de la linea  
+- nº linea + gg -> para ir a una línea en concreto  
+- :set nu -> mostrar números de línea en el editor  
+- :g/cadena1/s//cadena2/gp -> reeplazar cadena  
+- /"texto" -> buscar  
+- n -> siguiente coincidencia  
+- N --> anterior coincidencia  
   
+URL DE REFERENCIA: [https://apunteimpensado.com/guia-empezar-vim-linux/](https://apunteimpensado.com/guia-empezar-vim-linux/)  
 
+# GESTIÓN DE ERRORES
 
+## STDIN , STDOUT, STDERR  
+--------------------------------------------  
+Son las entradas y salidas del sistema, se representan con 0, 1 y 2 respectivamente  
+- stdin-> se corresponde con el 0 y es la entrada estándar. Por lo general, la entrada de datos estándar es el teclado. Es decir, lo que tecleas será la información usada. Tiene un dispositivo especial asociado que es /dev/stdin.
+- stdout-> identificado con 1, es la salida estándar. Por lo general se corresponde con el  monitor o pantalla de tu equipo, que es donde puedes ver la información. Por ejemplo, cuando  jecutas un comando ls el listado de contenido se mostrará en la pantalla El dispositivo asociado es /dev/stdout.
+- stderr: identificada con 2, es la salida estándar de error, para cuando sucede algún error  en algún programa. El dispositivo asociado es /dev/stderr.
 
+Normalmente se utilizan **STDOUT** y **STDERR** para capturar las salidas exitosas y erroneas de los comandos.  
+
+Para redirigir estas salidas a un fichero podemos utilizar:
+
+```shell
+#stdout
+1>/"dir"/"fichero"
+#stderr
+2>/"dir"/"fichero_log"
+```
+
+# COMPRIMIR Y DESCOMPRIMIR
+
+## - Tar
+Con esta herramienta comprimimos todos los elementos en un mismo fichero.
+
+- Comprimir -> tar -czvf comprimir.tar texto.txt  
+- Descomprimir -> tar -xzvf comprimir.tar  
+
+Algunos parámetros que podemos utilizar son:
+- v -> verbose  
+- c -> crear archivo  
+- z -> comprimir archivo  
+- f -> permite especificar el nombre de salida del fichero  
+- p -> conserva los permisos de los ficheros al comprimir y descomprimir  
+
+Para visualizar el contenido que hay dentro de un archivo comprimido podemos utilizar el siguiente comando:
+- tar -tf "nombre fichero tar.gz" 
+
+## - Zip - Unzip
+Esta herramienta comprime los ficheros uno por uno.
+- Comprimir -> zip "nombre archivo comprimido" "ruta archivo o carpeta a comprimir" 
+
+```shell
+#zip "nombre archivo comprimido" "ruta archivo o carpeta a comprimir"
+zip archivo_comprimido.zip ./documentos/prueba_comprimir  
+```
+
+- Descomprimir -> unzip [archivo_comprimido.zip](http://archivo_comprimido.zip/)  
+
+```shell
+#zip "nombre archivo comprimido" "ruta archivo o carpeta a comprimir"
+unzip archivo_comprimido.zip
+```
+
+- Visualizar contenido de un archivo comprimido
+
+```shell
+#zip "nombre archivo comprimido" "ruta archivo o carpeta a comprimir"
+unzip -l archivo_comprimido.zip
+```

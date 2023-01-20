@@ -1,0 +1,155 @@
+{
+  "main": {
+    "id": "50a0489f122f5ce0",
+    "type": "split",
+    "children": [
+      {
+        "id": "5e5e327dd2179469",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ec660355990a377c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "LINUX FORMACIÓN.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c155fca8ca5eba6b",
+    "type": "split",
+    "children": [
+      {
+        "id": "53bacfdfe720195d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1dcb3a93569e0656",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "7d9c03e8dafb5182",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "65f1d2d37c7bcf82",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "f2454397c0ebe9c3",
+    "type": "split",
+    "children": [
+      {
+        "id": "e054f203534166a4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9a13adcd1ca30e55",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "LINUX FORMACIÓN.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "fc26926e3dc878a6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "LINUX FORMACIÓN.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "5bf14c8c75998ece",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "d8b6d616d96bb945",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "LINUX FORMACIÓN.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "ec660355990a377c",
+  "lastOpenFiles": [
+    "SCRIPTING EN BASH.md",
+    "Untitled.md",
+    "LINUX FORMACIÓN.md"
+  ]
+}
