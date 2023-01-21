@@ -418,7 +418,7 @@ ssh-copy-id -f -i "clave publica" usuario@ip
 Para acceder a ssh -> ssh usuario@ip -i "certificado privado"  
 ```
   
-## -Scp
+## - Scp
 - Herramienta para transferencia de ficheros utilizando protocolo de conexión shh.
 
 - Para copiar fichero utilizaremos el siguiente comando:
@@ -433,7 +433,7 @@ SCP -i "clave privada" "archivo o directorio a copiar" usuario@ip:"ruta destino"
 	- –r es para copia recursiva, que incluirá todos los subdirectorios.
 	- –u borrará el archivo fuente después de que se complete la transferencia.
   
-## -Sftp  
+## - Sftp  
 - Subsistema de SSH para transferencia de ficheros  
   
 - Comandos útiles:
@@ -607,7 +607,27 @@ curl -u username:password -O ftp://Nombre_o_ip_FTP/fichero
 wget -o wget-log -r -l 5 --pider http://example.com
 ```
 
+- Descargar una página web completa (staticos y prerequisitos) 
+
+```shell
+wget --mirror --convert-links --page-requisites --no-parent -P /devcenter/ https://devcenter.es
+```
+
 - -o -> Recopila la salida en un archivo
 - -l -> Especifica el número de recurencia
 - -r -> Hace que la descarga sea recurrente
 - -spider -> Configura wget en modo araña. 
+
+## - Xargs
+-  Ejecuta el comando para cada uno de los elementos que se le pasan a la función. Por defecto el delimitador es el espacio, se puede modificar con -d  
+- Ejemplos:
+
+```shell
+xargs -n1 curl -o listaurls.txt  
+
+# Crea tanto ficheros como devuelva el comando echo  
+echo fichero2.txt fichero3.txt | xargs touch
+
+# Lista los tres últimos accesos para el usuario que devuelve el comando who
+who | awk '{print $1}' | xargs -I x last -3 x
+```

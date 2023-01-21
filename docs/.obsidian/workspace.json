@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "LINUX FORMACIÓN.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -148,8 +148,8 @@
   },
   "active": "ec660355990a377c",
   "lastOpenFiles": [
-    "SCRIPTING EN BASH.md",
     "Untitled.md",
-    "LINUX FORMACIÓN.md"
+    "LINUX FORMACIÓN.md",
+    "SCRIPTING EN BASH.md"
   ]
 }
