@@ -218,6 +218,15 @@ URL CON MÁS INFORMACIÓN: [https://geekland.eu/uso-del-comando-awk-en-linux-y-u
 
 # EDICIÓN DE TEXTO
 
+Hay multiples editores:
+- Vim
+- Nano
+- Sublime
+- Visual Estudio Code
+
+## - Vim
+- Nos centraremos en los comandos más utiles del editor Vim ya que este es el que seguro existe en todos los sistemas operativos tanto modernos como antiguos.
+
 Mostramos algunos de los comandos más útiles del edito Vi/Vim
 - :q! -> salir sin guardar  
 - :wq -> guardar y salir  
@@ -243,7 +252,7 @@ URL DE REFERENCIA: [https://apunteimpensado.com/guia-empezar-vim-linux/](https:/
 # GESTIÓN DE ERRORES
 
 ## Stdin , Stdout, Stderr  
---------------------------------------------  
+  
 Son las entradas y salidas del sistema, se representan con 0, 1 y 2 respectivamente  
 - stdin-> se corresponde con el 0 y es la entrada estándar. Por lo general, la entrada de datos estándar es el teclado. Es decir, lo que tecleas será la información usada. Tiene un dispositivo especial asociado que es /dev/stdin.
 - stdout-> identificado con 1, es la salida estándar. Por lo general se corresponde con el  monitor o pantalla de tu equipo, que es donde puedes ver la información. Por ejemplo, cuando  jecutas un comando ls el listado de contenido se mostrará en la pantalla El dispositivo asociado es /dev/stdout.
@@ -284,7 +293,7 @@ Esta herramienta comprime los ficheros uno por uno.
 
 ```shell
 #zip "nombre archivo comprimido" "ruta archivo o carpeta a comprimir"
-zip archivo_comprimido.zip ./documentos/prueba_comprimir  
+zip archivo_comprimido.zip ./Documentos/prueba_comprimir  
 ```
 
 - Descomprimir -> unzip [archivo_comprimido.zip](http://archivo_comprimido.zip/)  
@@ -376,3 +385,229 @@ OJO!!! -> la opción -R no modifica el propietario de la ruta en la que te encue
 ## - Añadir usuario y grupos
 
 adduser o useradd -> buscar distribución, varía en función del sistema operativo  
+
+# SSH
+
+- Protocolo para realizar conexiones remotas a otros sistemas. 
+- Existen dos tipos de autenticación:
+	- Cifrado Simetrico: Una misma clave compartida que conocen los 2 equipos  
+	- Cifrado Asimetrico: Par de claves privada/pública. En el servidor se instala la clave pública y el cliente almacena la clave privada. Una vez se realiza la conexión el cliente envía la clave privada al servidor y éste junto con la clave pública autoriza la conexión.  
+- Para crear una clave de conexión, deberemos ejecutar este comando en nuestra máquina
+
+```shell
+# Crear claves:  
+ssh-keygen -t ed25519  
+```
+
+- Los protocolos de seguridad más comunes son:
+- RSA
+- ed25519 -> protocolo más seguro y moderno que RSA  
+
+- Una vez ejecutado el comando anterios deberemos copiar el contenido de nuestro certificado público (.pub) en la máquina destino. Concretamente en el fichero
+
+```shell
+ ~/.ssh/authorized_keys  
+```
+
+También se puede copiar desde nuestra máquina, siempre y cuando conozcamos la contraseña de conexión al servidor destino
+
+```shell
+ssh-copy-id -f -i "clave publica" usuario@ip 
+#-f -> opción para forzar, a priori no sería necesario pero no hemos podido ejecutarlo.
+#Con esta opción especificamos el certificado privado que queremos utilizar en la conexión, si no se especifica escoge el que está con nombre por defecto
+Para acceder a ssh -> ssh usuario@ip -i "certificado privado"  
+```
+  
+## -Scp
+- Herramienta para transferencia de ficheros utilizando protocolo de conexión shh.
+
+- Para copiar fichero utilizaremos el siguiente comando:
+```shell
+SCP -i "clave privada" "archivo o directorio a copiar" usuario@ip:"ruta destino"  
+```
+
+- Parámetros:  
+	- -P especificar puerto  (22 es el puerto por defecto)
+	- –c cipher te da la posibilidad de especificar el algoritmo de cifrado que utilizará el  cliente.
+	- -o se especifica el protocolo de intercambio de clave publica  
+	- –r es para copia recursiva, que incluirá todos los subdirectorios.
+	- –u borrará el archivo fuente después de que se complete la transferencia.
+  
+## -Sftp  
+- Subsistema de SSH para transferencia de ficheros  
+  
+- Comandos útiles:
+- Los comandos que comienzan por l se ejecutan en local mientras está habilitada la conexión sftp  
+- Local - Remoto
+	- lls - ls  
+	- lcd - cd  
+	- lpwd - pwd  
+	- get - mget -> Obtener ficheros o directorios desde el equipo remoto (mget) multiples peticiones  
+	- put - mput -> envía ficheros o directorios desde el equipo local al remoot (mput) multiples peticiones  
+
+# JSON
+- Tipo de ficheros que se utilizan para intercambio de datos. Tienen una estructura de
+	- Clave - valor  
+	- Delimitados por {} 
+  
+- Para el tratamiento de datos de JSON desde linux utilizamos la herramienta jq  
+```shell
+# ejemplo.json
+{
+"colors": [
+	{
+	 "color": "black",
+	 "category": "hue",
+	 "type": "primary",
+	 "code":{
+	 	"rgba":[
+			255,
+			255,
+			255,
+			1
+		],
+		"hex": "#000"
+	 }
+	},
+	{
+	 "color": "white",
+	 "type": "primary",
+	 "code": {
+		 "rgba": [
+			 101,
+			 104,
+			 117,
+			 1
+		 ],
+		 "hex": "#FFF"
+	 }
+	}
+]
+}
+```
+
+- Los comandos para utilizar la herramienta jq son los siguientes:
+	- < ejemplo.json jq '.colors[0].color'
+	- cat ejemplo.json | jq '.colors[0].color'  
+  
+- Basandonos en el fichero, estos son unos ejemplos que podemos utilizar
+
+```shell
+# EJEMPLOS VARIOS  
+cat ejemplo1.json | jq 'dell(.colors[1].category) | implode'  
+cat ejemplo1.json | jq 'del(.colors[1].category) | implode'  
+cat ejemplo1.json | jq 'del(.colors[1].category)'  
+cat ejemplo1.json | jq 'del(.colors[0].category)'  
+cat ejemplo1.json | jq 'add(.colors[].category)'  
+cat ejemplo1.json | jq 'addvalue(.colors[].category)'  
+cat ejemplo.json | jq '.colors[].category=="hue"'  
+cat ejemplo.json | jq '.colors[].category=="huee"'  
+cat ejemplo.json | jq '.colors[].category=="hue"'  
+cat ejemplo.json | jq 'if .colors[].category=="hue" then echo "existe" else echo "no existe"'  
+cat ejemplo.json | jq 'if .colors[].category=="hue" then eco "existe" else "no existe" end'  
+cat ejemplo.json | jq 'if .colors[].category=="hue" then "existe" else "no existe"'  
+cat ejemplo.json | jq 'if .colors[].category=="hue" then "existe" else "no existe" end'  
+```
+
+# CURL Y WGET
+
+- Son herramientas para obtener datos desde una máquina remota
+	- wget -> solo admite protocolos http, https, ftp y sftp. 
+		- Por defecto descarga los documentos  
+	- curl -> permite muchos más protocolos.
+		- Por defecto muestra los datos por pantalla.  
+
+- Instalación
+
+	- Ubuntu / Debian
+
+```shell
+sudo apt install curl
+sudo apt install wget
+```
+
+	- CentOS
+
+```shell
+sudo yum install curl
+sudo yum install wget
+```
+
+## - Curl
+
+- Protocolos compatibles:
+	- HTTP y HTTPS
+	- FTP y FTPS
+	- IMAP e IMAPS
+	- POP3 y POP3S
+	- SMB y SMBS
+	- SFTP
+	- SCP
+	- TELNET
+	- GOPHER
+	- LDAP y LDAPS
+	- SMTP y SMTPS
+
+- Sintaxis:
+	- curl \[OPTIONS] \[URL]
+		- curl https://devcenter.es
+		- curl https://devcenter.es > fichero.txt
+
+- Opciones, Hay comandos Curl que nos dan la opción de descargar archivos de forma remota, lo podemos hacer de dos maneras:
+	- -O -> Guardará el archivo en el directorio de trabajo actual con el mismo nombre que tiene el archivo remoto.
+	- -o -> Permite especificar el nombre de archivo o ubicación diferente.
+	- -C -> Permite reaunar una descarga en caso de que esta se haya cortado.
+- Multiples descargas: 
+	- Para ello haremos uso del comando **xargs** deberemos especificarle un archivo al comando con las rutas que queremos descargar
+
+```sehll
+xargs –n1 curl -O < listaUrls.txt
+```
+
+- Cookies -> Es posible a través de comando cURL descargar las cookies de un sitio web y luego verlas, para ello, usaremos el siguiente comando con el fin de guardarlas en un archivo .txt. y luego será posible usar el  comando cat para ver el archivo generado:
+
+```shell
+curl --cookie-jar Mycookies.txt https://www.samplewebsite.com/index.html -O
+```
+
+- Ftp
+	- Descargar archivos
+
+```shell
+curl -u username:password -O ftp://Nombre_o_ip_FTP/fichero
+```
+
+		- Descargar archivos
+
+ ```shell
+ curl -u username:password -T fichero ftp://Nombre_o_ip_FTP
+```
+
+## - Wget
+
+- Herramienta informática creada por el Proyecto GNU.
+- Puedes usarlo para recuperar contenido y archivos de varios servidores web. El nombre es una  combinación de World Wide Web y la palabra get. Admite descargas a través de FTP, SFTP, HTTP y HTTPS.
+- Wget se crea en C portátil y se puede usar en cualquier sistema Unix/linux. También es posible implementarlo en Mac OS X, Microsoft Windows, y otras plataformas.
+
+ ```shell
+ wget "url"
+```
+
+- Parámetros:
+	- -O -> especificar nombre de fichero
+	- --limit-rate=XXX -> establecer un límite de velocidad de descarga
+	- --tries=XXX -> establecer número de reintentos
+	- -b -> descarga en segundo plano
+	- wget-log -> fichero de log (aparecerá en el directorio de trabajo)
+		- Se puede visualizar con *tail -f wget-log*
+- Enlaces rotos:
+	- Podemos comprobar si existen enlaces rotos en una url determinada
+
+```shell
+wget -o wget-log -r -l 5 --pider http://example.com
+```
+
+- -o -> Recopila la salida en un archivo
+- -l -> Especifica el número de recurencia
+- -r -> Hace que la descarga sea recurrente
+- -spider -> Configura wget en modo araña. 
