@@ -812,22 +812,235 @@ echo "$num1 + $num2 = $resultado"
 
 
 # ARRAYS 
-- miarray
+
+- Un vector o array es una variable que en lugar de contener un solo valor, contiene varios. Se define igual que una variable normal, pero encerrando los valores entre paréntesis y separados por espacios.
+
+```shell
+miarray=(a b c d) (sin espacios en el igual)
+```
+
+- Los índices del array van desde 0 hasta el número de valores-1. En este caso de 0 a 3
+- Para acceder a los elementos del array usaremos la siguiente notación:
+	- miarray[0] -> “a”
+	- miarray[2] -> “c”
+	- ${miarray[*]} -> devuelve todos los valores que contiene
+	- ${miarray[@]} -> devuelve todos los valores que contiene
+	- ${#miarray[*]} -> devuelve el número de elementos que contiene
+	- ${#miarray[@]} -> devuelve el número de elementos que contiene
+	- ${!miarray[@]} -> devuelve los índices del array
+
+- Podemos modificar o añadir elementos mediante el operador [ ]. p.e miarray[15]=”test 1”
+- Para eliminar un elemento usaremos unset nombre_array[posicion_a_eliminar]
+	- p.e unset miarray[1]
+- Al eliminar, no desaparecen las posiciones, simplemente quedan vacías.
+
+- Podemos llenar el array con la salida de un comando, los espacios y saltos de línea actuarán como separadores de elementos:
+
+```shell
+array=($(cat /etc/passwd | cut -d ':' -f 1))
+```
+
+- En caso de tener un salto de línea como separador, podemos recorrerlo haciendo uso de IFS, como vimos anteriormente.
+
+```shell
+#!/bin/bash
+IFS=$'\n' # Necesario el símbolo $, de otro modo lo interpreta de forma literal
+a=($(cat /etc/passwd | cut -d ':' -f1))
+echo "${a[*]}"
+```
+
+- Ejemplos
+
+```shell
+#!/bin/bash
+vector=( a b Cambiado d )
+echo "Primer elemento: ${vector[0]}"
+echo "Segundo elemento: ${vector[1]}"
+echo "Tercer elemento: ${vector[2]}"
+echo "Ultimo elemento: ${vector[3]}"
+echo "Elemento no existente: ${vector[5]}“
+```
+
+```shell
+#!/bin/bash
+ficheros=( `ls` )
+echo ${ficheros[*]}
+echo “Hay ${#ficheros[*]} ficheros
+```
+
+```shell
+#!/bin/bash
+vector=( uno dos tres cuatro cinco seis )
+for valor in ${vector[@]}
+do
+	echo "$valor "
+done
+for i in ${!vector[@]}
+do
+	echo "${vector[$i]}"
+done
+```
+
+```shell
+#!/bin/bash
+vector=( uno dos tres cuatro cinco seis )
+# De esta manera debemos saber que hay 6 elementos
+for (( i = 0; i < 6; i++ ))
+do
+	echo "Elemento ${i}: ${vector[$i]} "
+done
+# Aquí no hace falta saber cuántos elementos hay
+for (( i = 0; i < ${#vector[*]}; i++ ))
+do
+	echo "Elemento ${i}: ${vector[$i]} "
+done
+```
+
+
 
 # STRING
 
- - con $(cadena:posicion:longitud) podemos extraer una subcadena de otra
-	 - echo $(string:0) -> sin longitud, extrae una cadena entrea
-- con $(cadena/buscar/reemplazar) podemos reemplazar la primera coincidencia de 'buscar' por 'reemplazar' y con $(cadena//buscar//reemplazar) reemplazaremos todas
-	- echo $(string/abc/xyz) -> reemplaza abc por xyz en la primera coincidencia
-	- echo $(string//abc//xyz) -> reemplaza abc por xyz en todas las coincidencias
-- Borrar prefijo
-	- $(cadena#subcadena) podemos borrar la coincidencia más corta de subcadena desde el principio
-	- $(cadena##subcadena) podemos borrar la coincidencia más larga de subcadena desde el principio
-- Borrar sufijo -> igual que el prefijo pero utilizando % en vez de # 
-	- $(cadena%subcadena) podemos borrar la coincidencia más corta de subcadena desde el final
-	- $(cadena%\%subcadena) podemos borrar la coincidencia más larga de subcadena desde el final
+- Manipulación de strings
+	 - Extraer subcadena
+		 - con $(cadena:posicion:longitud) podemos extraer una subcadena de otra
+		 - echo $(string:0) -> sin longitud, extrae una cadena entrea
+	-  Reemplazar subcadena
+		- con $(cadena/buscar/reemplazar) podemos reemplazar la primera coincidencia de 'buscar' por 'reemplazar' y con $(cadena//buscar//reemplazar) reemplazaremos todas
+		- echo $(string/abc/xyz) -> reemplaza abc por xyz en la primera coincidencia
+		- echo $(string//abc//xyz) -> reemplaza abc por xyz en todas las coincidencias
+	- Borrar prefijo
+		- $(cadena#subcadena) podemos borrar la coincidencia más corta de subcadena desde el principio
+		- $(cadena##subcadena) podemos borrar la coincidencia más larga de subcadena desde el principio
+	- Borrar sufijo -> igual que el prefijo pero utilizando % en vez de # 
+		- $(cadena%subcadena) podemos borrar la coincidencia más corta de subcadena desde el final
+		- $(cadena%\%subcadena) podemos borrar la coincidencia más larga de subcadena desde el final
 
+- Ejemplos
+
+```shell
+# Extraer la ruta del archivo
+# borra desde la última barra hasta el final (*)
+echo”${myfile%/*}” /home/marina/scripts/0_Teoria_ejemplos
+```
+
+```shell
+# Extraer el nombre del archivo
+# borra la cadena más larga desde el principio hasta /
+echo "${myfile##*/}” prueba.txt
+```
+
+```shell
+# Extraer el nombre sin la extensión
+filename=“${myfile##*/}” prueba.txt
+echo ${filename%.*} prueba
+```
+
+```shell
+# Obtén la extensión del archivo
+echo ${myfile##*.}
+```
+
+# CRONTAB
+
+- Herramienta del sistema para ejecutar tareas automáticamente
+- Para ver las tareas que hay configuradas utilizaremos el comando **crontab -l**
+- Para modificar las tareas utilizaremos el comando **crontab -e**
+- A continuación se muestra una imagen donde se explica el formato que se tiene que utilizar
+
+![[Pasted image 20230122195349.png]]
+
+- Ejemplos
+
+![[Pasted image 20230122195520.png]]
+
+- Existen herramientas para generarlos automáticamente.
+[Generador Cron]https://crontab-generator.org/
+![[Pasted image 20230122195820.png]]
+
+# COMANDOS ÚTILES
+
+## - Bc
+
+- Consiste en una calculadora que facilita algunas tareas como el cálculo con decimales:
+	- Script que calcula un promedio de 3 números y devuelve el resultado con 2 decimales:
+
+```shell
+#!/bin/bash
+echo “scale=2; ($1+$2+$3)/3” | bc
+```
+
+	- Script que calcula la raíz cuadrada de un número con 20 decimales:
+
+```shell
+#!/bin/bash
+squareroot=$(echo“scale=20; sqrt($1)”|bc)
+echo $squareroot
+```
+
+
+
+## - Cut
+ - Se emplea para extraer segmentos de líneas de texto de un fichero de texto o de la entrada estándar.
+- Los parámetros que admite son:
+	- -c rango: obtiene el rango indicado de caracteres sueltos
+	- -f rango: obtiene el rango indicado de campos separados por el delimitador -d
+	- -d “delimitador“
+- Ejemplos:
+
+```shell
+#!/bin/bash
+# Obtiene los 5 primeros caracteres de cada línea de texto del fichero.
+cut -c1-5 /etc/passwd
+```
+
+```shell
+#!/bin/bash
+# Obtiene los textos de las columnas 1 y 3 de cada línea del texto de entrada, tomando como separador de columna el carácter ':’. La salida serán los usuarios y sus identificadores
+cut -d ':' -f1,3 /etc/passwd
+```
+
+## - Tr
+
+- Elimina o reemplaza caracteres de una cadena de entrada con las opciones siguientes:
+	- -d cadena1: elimina las ocurrencias de cadena1 en el texto de entrada
+	- -s cadena1 cadena2: sustituye las ocurrencias de la cadena1 por la cadena2.
+
+Si hubiera varias cadena1 seguidas, sólo sustituye 1.
+
+- Ejemplo:
+
+```shell
+#!/bin/bash
+# Elimina los espacios en blanco
+ls -l | tr -d " "
+```
+
+```shell
+#!/bin/bash
+# Muestra por pantalla el resultado del comando ls -l, pero cambiando todas las letras por mayúsculas
+ls -l | tr -s "[az]" "[AZ]"
+```
+
+```shell
+#!/bin/bash
+# obtiene el tamaño de los elementos que contiene tu directorio empleando ls
+ls -l | tr -s ‘ ’ | cut -d ‘ ’-f5
+```
+
+## - Seq y {}
+
+- Comando seq y rango numérico {} nos permiten crear secuencias:
+	- seq 1 9 → Genera los números del 1 al 9
+	- seq 1 2 9 → Igual, pero de 2 en 2 (números impares sólo).
+	- seq 0.1 0.1 1 → Desde 0.1 a 1 incrementando en 0.1 cada vez.
+	- seq -s '-' 1 9 → Utiliza el carácter '-' para separar los números (por defecto → \n)
+	- seq -w 1 19 → Todos los números ocupan lo mismo (rellena con 0 a la izquierda)
+	- seq -f '%.2f' 1 2.5 21 → Con -f indicas el formato decimal al estilo de printf
+	- {1..9} → Parecido a seq 1 9. Probad con echo {1..9}, y echo “Num: “{1..9}
+	- {01..19} → Números de 2 cifras
+	- {0..9..2} → Equivale a seq 1 2 9
+	- for i in {1..9}
+	- for i in $(seq 1 9)
 
 # EJEMPLOS DE SCRIPT
 - Machea el nombre introducido con el nuestro y te obliga a pulsar cualquier tecla para continuar
@@ -851,7 +1064,7 @@ echo "$num1 + $num2 = $resultado"
 - Obtener rutas relativas
 
 ```shell
-#Si coincide, elimina el valor de la variable HOME desde el principio al valor de la variable PWD
+# Si coincide, elimina el valor de la variable HOME desde el principio al valor de la variable PWD
 
 echo ${PWD}
 /home/bootuser/Documentos/Scripting
@@ -861,10 +1074,3 @@ echo ${HOME}
 echo ${PWD#$HOME}
 /Documentos/Scripting
 ```
-
-
-# CRONTAB
-PONER EJEMPLO Y WEB DE CRONTAB GENERATOR
-
-//ACONSEJABLE PONER EN EL CRONTAB EN EQUIPOS ANTIGUOS
-ntpdate -s hora.roa.es
