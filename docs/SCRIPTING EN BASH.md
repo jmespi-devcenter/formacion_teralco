@@ -37,7 +37,7 @@ set -v
 set -n
 ```
 
-## -Ejecución
+## - Ejecución
 
 - Para ejecutar un scrip utilizaremos, debemos tener permisos de ejecución sobre el fichero.
 
