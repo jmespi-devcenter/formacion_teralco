@@ -37,43 +37,43 @@ set -v
 set -n
 ```
 
-## -EJECUCIÓN
+## -Ejecución
 
-Para ejecutar un scrip utilizaremos, debemos tener permisos de ejecución sobre el fichero.
+- Para ejecutar un scrip utilizaremos, debemos tener permisos de ejecución sobre el fichero.
 
 ```shell
 ./"nombre fichero"
 ```
 
-Si no añadimos esta línea al principio del fichero podemos utilizar el comando.
+- Si no añadimos esta línea al principio del fichero podemos utilizar el comando.
 Para este  ejemplo solo tenemos que tener permisos de lectura
 
 ```shell
 bash "nombre del fichero"
 ```
 
-## -ERRORES
-**Importante** -> un script puede no detenerse ante un error, continua su ejecución de comandos.
-Debemos controlar los errores y finalizar la ejecución del mismo si procede.
-
-Si el último resultado de ejecución de un comando en un script el resultado obtenido de 
+## - Errores
+- **Importante** -> un script puede no detenerse ante un error, continua su ejecución de comandos.
+- Debemos controlar los errores y finalizar la ejecución del mismo si procede.
+- Si el resultado obtenido de la ejecución de un comando en un script es distinto de 0, significa ese comando no ha sido exitoso.
 
 ```shell
 echo $?
 2
 ```
 
-Si la salida es exitosa el resultado será:
+- Si la salida es exitosa el resultado será:
+
 ```shell
 echo $?
-1
+0
 ```
 
 # EXPRESIONES
 
 Utilizaremos las expresiones para realizar comparaciones y determinar el flujo de ejecución en funcion del cumplimiento de estas expresiones.
 
- ## -COMPARADORES
+ ## - Comparadores
 
 - <= -> Menor que
 - >= -> Mayor que
@@ -86,7 +86,7 @@ Utilizaremos las expresiones para realizar comparaciones y determinar el flujo d
 - -z -> verdadero si la variable está vacía
 - \[\[ $var1]] -> comprueba si la variable existe y contiene un valor que no sea vacío
 
-## -COMPARADORES NUMÉRICOS
+## - Comparadores numéricos
 
  - num1 **-eq** num2 -> Comprueba que los numeros son **iguales**
  - num1 **-ne** num2 -> Comprueba que los numeros son **distintos**
@@ -95,7 +95,7 @@ Utilizaremos las expresiones para realizar comparaciones y determinar el flujo d
  - num1 **-lt** num2 -> Comprueba qi num1 es **menor** que num 2
  -  num1 **-le** num2 -> Comprueba si num 1 es **menor o igual** que num 2
 
-## -COMPARADORES DE FICHEROS
+## - Comparadores para ficheros
 - -e fichero -> Comrpueba si el **fichero existe**
 - -f fichero -> Comprueba si el **fichero existe y además es un fichero**
 - -d fichero -> Comprueba si el **fichero existe y ademas es un directorio**
@@ -106,13 +106,14 @@ Utilizaremos las expresiones para realizar comparaciones y determinar el flujo d
 - **fich1 -nt fich2** -> Comprueba si fich1 se ha modificado más recientemente que fich2 (newer than)
 - **fich1 -ot fich2** -> Comprueba si fich1 se ha modificado antes que fich2 (older than)
 
-## -CARACTERES ESPECIALES
+## - Caracteres Especiales
 Con el carácter **\\**** escapamos el siguiente caracter (se trata como si fuera texto)
 El texto siempre debería ir incluido entre comillas simples o dobles
 
 Hay 3 carácteres que no se ignoran **' $ y /** por lo que hay que escaparlos manualmente
 
-## -EJEMPLOS
+## - Eejmplos
+
 ```shell
 echo "hoy es date"
 ? hoy es date
@@ -122,10 +123,10 @@ echo "hoy es \$(date)"
 ? hoy es $(date)
 echo 'hoy es $(date)'
 ? hoy es $(date)
-
 ```
 
 # VARIABLES
+
 - Se pueden declarar variables con el comando **declare**
 
 ```shell
@@ -137,17 +138,26 @@ printenv
 
 -  Con la opción - se otorgan propiedas a las variables y con la opción + se le quitan. 
 - Opciones de la función declare: #COMPLETAR
-	- -i ->
-	- 
+	- -i ->La variable solo podrá almacenar enteros
+	- +1 -> Borra la restricción de enteros
+	- -r -> Declaración de una constante, solo lectura
+	- -a -> Fuerza a la variable a ser un array
+	- -A -> Array asociativo, solo soportado a partir de la versión 4 de BASH
+	- -p -> Muestra el contenido de la variable y sus atributos
+	- -u -> Convierte la cadena asignada a la variable a mayúsculas automáticamente
+
 - Las variables de sistema son en mayúsculas
+
 ```shell
 echo $SHELL
 echo $PATH
 printenv
 ```
+
 - Las variables creadas por los usuarios deberán ir en minúsculas y empezar por letras
 	- deberán ser entendibles
 	- Se crean de la siguiente manera
+
 ```shell
 variable=valor
 echo $variable
@@ -167,6 +177,7 @@ unset variable
 ```
 
 - Variable de solo lectura (costante)
+
 ```shell
 readonly variable=valor
 ```
@@ -175,7 +186,7 @@ readonly variable=valor
 	- Solo para terminales hijo, muy util para exportar variables en llamadas a terminales en scripts
 
 ```shell
-$export saludo = "Hola"
+$export saludo="Hola"
 ```
 
 ### -Uso de comas y contrabarras
@@ -187,7 +198,7 @@ echo 'mi nombre es $minombre'
 mi nombre es $minombre
 ```
 
-- " Interpreta variables por lo que si escribimos texto entre "" va a interpretar el valor de las variables
+- " Interpreta variables por lo que si escribimos texto entre " va a interpretar el valor de las variables
 
 ```shell
 $echo "mi nombre es $minombre"
@@ -215,11 +226,22 @@ echo \*
 *
 ```
 
+## - Ifs
+
+- IFS es una variable de sistema que está definida prácticamente en todas las funciones que especifica el delimitador por defecto para cada una de ellas.
+- Podemos cambiar el valor de esta en caso que nuestro delimitador para un caso determinado cambiase, es recomendable almacenar el valor actual de la variable y devolverlo a su estado una vez se haya ejecutado nuestra función en concreto
+
+```shell
+# Recomendable hacerlo solo temporalmente
+OLD_IFS=$IFS - cambiar el valor - usarlo - dejarlo como estaba - IFS=$OLD_IFS
+```
 
 # COMANDOS
 
-### -ECHO
+## - Echo
+
  - Visualiza comandos por pantalla
+
  ```shell
 	 echo "Hola \n que tal"
 	 # "Hola que tal"
@@ -249,7 +271,7 @@ numlineas=`wc -l prueba | cut -d ' ' -f 1`
 6
 ```
 
-### -PRINTF
+## - Pintf
 
 Muestra datos por pantalla, ya sea texto, variables, etc
 
@@ -270,7 +292,7 @@ printf "Te llamas %s y tu edad es %d\n" $nombre $edad
 Te llamas Jorge y tu edad es 31
 ```
 
-### -READ
+## - Read
 
 Con este comando tambien se puede asignar valor a las variables
 
@@ -311,15 +333,56 @@ Se utiliza la variable $IFS para separar lo que se asigna a cada variable
 	IFS=":" read var1 var2 	
 ```
 
-# ARGUMENTOS
-Un argumento es un parámetro que se le pasa a una función o programa. Esto puede modificar la ejecución del mismo.
+## - Seq
 
-A bash por defecto se le pueden pasar 9 argumentos, desde $1 a $9. Si fuesen necesarios más se puede redefinir pero no es lo común.
+- Seq genera una secuencia entre 2 valores dados
+
+```shell
+#genera una secuencia de x a y donde x ha de ser < que y
+seq x y
+```
+
+- Ejemplos
+
+```shell
+#genera una secuencia de x a y donde x ha de ser < que y
+seq 1 5
+1
+2
+3
+4
+5
+```
+
+```shell
+#genera una secuencia de x a y con un incremento de z donde x ha de ser < que y
+#seq x z y
+seq 1 2 6
+1
+3
+5
+```
+
+# ARGUMENTOS
+
+- Un argumento es un parámetro que se le pasa a una función o programa. Esto puede modificar la ejecución del mismo.
+
+- A bash por defecto se le pueden pasar 9 argumentos, desde $1 a $9. Si fuesen necesarios más se puede redefinir pero no es lo común.
 
 EJEMPLO
 
 ```shell
 ./ejemplo.sh arg1 arg2 arg3....
+```
+
+- Con el parámero $"numero" recogemos el valor de cada uno de los argumentos dentro del scrip.
+
+```shell
+./ejemplo.sh arg1 arg2 arg3....
+
+$ $1 -> tendría el valor de arg1
+$ $2 -> tendría el valor de arg2
+$ $3 -> tendría el valor de arg3
 ```
 
 - Valores por defecto
@@ -333,7 +396,7 @@ suma=$((${1:-0}+${2:-0}+${3:-0}))
 
 # CONDICIONALES
 
-## -COMPARADORES
+## - Comparadores
 - - -> resta
 - ! -> Negación
 - <= -> Menor que
@@ -343,8 +406,10 @@ suma=$((${1:-0}+${2:-0}+${3:-0}))
 - && -> Se cumplan condición 1 y condición 2
 - || -> Se cumpla condición 1 ó condición 2
 
-## -IF
+## - If
+
 - Realiza una acción si se cumple una condición y sino ejecutamos otra
+
 ```shell
 $ if [[ "CONDICION" ]]
 then
@@ -356,11 +421,11 @@ else
 fi
 ```
 
-EJEMPLOS
+- Ejemplo
 
 ```shell
 #!/bin/bash
-
+# Siempre dejar espacio en blanco en los corchetes de la condición
 if [ $# -eq 1 ]
 then
 	echo "hago mi script"
@@ -370,7 +435,7 @@ else
 fi
 ```
 
-## -CASE
+## - Case
 - En este condicional escogeremos cada una de las funciones en función del valor del argumento que reciba la función
 
 ```shell
@@ -386,7 +451,8 @@ $ case $var in
 esac
 ```
 
-EJEMPLOS
+- Ejemplo
+
 ```shell
 #!/bin/bash
 case $var in 
@@ -410,12 +476,12 @@ esac
 	- sleep x -> detiene el programa dura x segundos
 
 
-## -FOR IN
+## - For in
 
 ```shell
 items="1 2 3 4 5 6 7 8 9 10"
 
-for i in $items
+for item in $items
 do 
 	echo $item
 done
@@ -427,14 +493,13 @@ done
 - La variable lista si que va con $ porque queremos leer el valor en cada iteración
 - El separador por defecto será el espacio en blanco
 
-SEPARADOR
- - Por defecto el separador por defecto es el " ", para modificar este sepador haremos uso de la variable $IFS
-	 - **IFS** ="separador"
-	 - **IFS**=$\'\n' ->(separador por salto de línea)
-	 - **IFS**=$\'\t' -> (separador por tabulación)
+- SEPARADOR
+	 - Por defecto el separador por defecto es el " ", para modificar este sepador haremos uso de la variable $IFS
+		 - **IFS** ="separador"
+		 - **IFS**=$\'\n' ->(separador por salto de línea)
+		 - **IFS**=$\'\t' -> (separador por tabulación)
 
-EJEMPLOS
-
+- Ejemplos
 
 ```shell
 #!/bin/bash
@@ -490,35 +555,25 @@ do
 done
 ```
 
-## -SEQ
-- Seq genera una secuencia entre 2 valores dados
-```shell
-#genera una secuencia de x a y donde x ha de ser < que y
-seq x y
-```
-
-EJEMPLOS
+## - For
+- Las estructuras for son adecuadas siempre que sepamos el número de repeticiones necesarias en el bucle.
 
 ```shell
-#genera una secuencia de x a y donde x ha de ser < que y
-seq 1 5
-1
-2
-3
-4
-5
+#/bin/bash
+
+#En este caso se trataria la cadena "1 2 3 4 Hola Adios" como un único elemento de la lista
+
+for ((x=1;x<=$lineas;x++))
+do
+	echo $x
+	linea=`head -n $x nombres.txt | tail -n 1`
+	nombre=`echo $linea | cut -d ' ' -f 1`
+	# adduser $nombre
+	echo "$nombre añadido como usuario"
+done
 ```
 
-```shell
-#genera una secuencia de x a y con un incremento de z donde x ha de ser < que y
-#seq x z y
-seq 1 2 6
-1
-3
-5
-```
-
-## -WHILE
+## - While
 - Bucle de repetición donde se han de gestionar manualmente la inicialización del iterador y el incremento
 
 ```shell
@@ -533,16 +588,58 @@ done
 echo $x
 ```
 
-EJEMPLOS
+- Ejemplo
 
-## -UNITL
+```shell
+#!/bin/bash
+x=1
+while [ $x -lt 10 ]
+do
+	echo $x
+	if [ $x -eq 4 ]
+	then
+		echo “ahora x=4”
+	fi
+	echo "voy a incrementar x"
+	let x=$x+1
+done
+echo $x
+```
 
-- Misma función que while pero en vez de mientras que se cumpla la condición 
+- Podemos leer contenido de un archivo con el comando **<** utilizando los operadores de los ficheros
+
+```shell
+while read -r
+do
+	printf "%s\n" "$REPLY"
+done < nombres.txt
+```
+
+## -Until
+
+- Funcionamiento opuesto al de la función while
+- Until ejecuta las instrucciones mientras la expresión es falsa y hasta que sea verdadera.
+
+```shell
+#!/bin/bash
+x=1
+until [ $x -gte 10 ] do # Se ejecuta, mientras no se cumpla la condición
+	echo $x
+	if [ $x -eq 4 ]
+	then
+		echo “ahora x=4”
+	fi
+	echo "voy a incrementar x"
+	let x=$x+1
+done
+echo $x
+```
 
 # EXPRESIONES ARITMETICAS
 
-## -EXPR
-Realiza operaciones matemáticas, tiene una complejidad alta
+## - Expr
+
+- Realiza operaciones matemáticas, tiene una complejidad alta
 - Hay que escapar los caracteres especiales
 
 EJEMPLOS
@@ -552,24 +649,30 @@ EJEMPLOS
 $ expr 3 + 4
 7
 
-#Longitud de una variable
+# Longitud de una variable
 $ expr length "hola"
 4
 
-#Obtiene 2 caracteres a partir de la posición 3
+# Obtiene 2 caracteres a partir de la posición 3
 expr substr "Extintor" 3 2
 ti
 
-#Da error porque hay que escapar el *
+# Da error porque hay que escapar el *
 $ expr 3 * 4
 expr: syntax error: unexpected argument «Descargas»
 
-#Multiplicación escapando el *
+# Multiplicación escapando el *
 $ expr 3 \* 4
 12
+
+# Asignar operación a variable
+$ var=`expr 3+4`
+$ echo $var
+$ 7
 ```
 
-## -LET
+## - Let
+
 Comando más intuitivo que expr pero solo opera con números, no funciona con cadenas.
 - Es aconsejable encerrar la expresión entre comillas para evitar problemas con los caracteres
 - Se asigna el resultado devuelto a la variable automáticamente
@@ -597,15 +700,122 @@ $ (( x = x + 3 ))
 $ (( x = $x + 3 ))
 ```
 
-# FUNCIONES #COMPLETAR 
+# FUNCIONES 
+
 - Elementos que agrupamos para reutilizarlas más de 1 vez
 - Definición () indica que es función y las {} para el contenido.
 - Le podemos enviar parámetros con $1, $2, $3. Si se le pasa un argumento esta función no va a poder acceder a los parámetros iniciarles del script
 
-# ARRAYS #COMPLETAR 
+- Ejemplo
+
+```shell
+#!/bin/bash
+# Aquí sólo estamos definiendo la función,
+# no se ejecutará hasta que se la llame
+funcion () {
+	echo "Soy una función"
+}
+echo "Vamos a llamar a la función..."
+funcion
+```
+
+- Conceptos:
+	- El código de las funciones se pone al principio, antes de los comandos del script.
+	- Normalmente se le da un nombre representativo de lo que hace.
+	- Igual que un script puede recibir parámetros y se accede a ellos de forma idéntica $1, $2, $3, $* para la lista de parámetros, $# para el número de parámetros, etc.
+	- La función tendrá acceso a los parámetros que le pasemos a ella directamente y no tendrá acceso a los parámetros que se le hayan pasado al programa principal.
+	- Las funciones tienen una instrucción return similar al exit en el script, sale de la función devolviendo un valor entre 0 y 255.
+	- Cuando la función termina se accede al valor que ha devuelto mediante la variable $?
+
+- Ejemplo
+
+```shell
+#!/bin/bash
+declare -r CORRECTO=0
+declare -r ERROR=1
+
+# Esta función comprueba si un archivo existe.Si existe devuelve 0->Verdadero, y si no 1->Falso
+existe () {
+if [[ -e $1 ]] 
+then
+	return $CORRECTO
+else
+	return $ERROR
+fi
+}
+existe "archivo1.txt"
+
+# Comprobamos el valor devuelto por la función
+if [[ $? -eq $CORRECTO ]]
+then
+	echo "El archivo existe."
+else
+	echo "El archivo NO existe."
+fi
+```
+
+- Las funciones tienen una instrucción return similar al exit en el script, sale de la función devolviendo un valor entre 0 y 255.
+- Si lo último que ejecuta la función es un comando, y la salida de la función va a depender de si el comando falla o no, podríamos ahorrarnos la instrucción return, ya que la salida de ese comando se guardará en la variable global $? igualmente.
+
+- Ejemplos
+
+```shell
+#!/bin/bash
+# Función que crea un fichero
+crear_fichero () {
+	touch $fichero
+}
+read -p "Dime nombre de fichero: " fichero
+if crear_fichero
+then
+	echo "Fichero $fichero creado";
+exit 0;
+else
+	echo "Error en función crear_fichero";
+exit 1;
+fi
+```
+
+```shell
+#!/bin/bash
+# Función que crea un fichero
+crear_fichero () {
+	touch $fichero
+}
+read -p "Dime nombre de fichero: " fichero
+if crear_fichero
+then
+	echo "Fichero $fichero creado";
+	exit 0;
+else
+	echo "Error en función crear_fichero";
+	exit 1;
+fi
+```
+
+- Por defecto todas las variables que usemos en una función son globales. Eso quiere decir que cuando la función termine seguirán existiendo en el script.
+- Para indicar que una variable es local a la función, pondremos la palabra local o declare delante de la misma la primera vez que le demos valor. De esta forma la variable dejará de existir cuando acabe la función.
+
+```shell
+#!/bin/bash
+suma () {
+	local num1=$1
+	declare num2=$2
+	let "resultado = $num1+$num2"
+}
+suma 4 6
+# num1 y num2 no existen fuera de la función al ser locales
+# así que no los mostrará por pantalla. Resultado sin embargo
+# no ha sido definida como local, así que estará accesible desde fuera.
+echo "$num1 + $num2 = $resultado"
+```
+
+
+# ARRAYS 
 - miarray
 
 # STRING
+
  - con $(cadena:posicion:longitud) podemos extraer una subcadena de otra
 	 - echo $(string:0) -> sin longitud, extrae una cadena entrea
 - con $(cadena/buscar/reemplazar) podemos reemplazar la primera coincidencia de 'buscar' por 'reemplazar' y con $(cadena//buscar//reemplazar) reemplazaremos todas
