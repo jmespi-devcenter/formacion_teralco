@@ -189,7 +189,7 @@ readonly variable=valor
 $export saludo="Hola"
 ```
 
-### -Uso de comas y contrabarras
+## - Uso de comas y contrabarras
 
 - '  Lo que escribimos entre comillas simples es literal
 
@@ -615,7 +615,7 @@ do
 done < nombres.txt
 ```
 
-## -Until
+## - Until
 
 - Funcionamiento opuesto al de la función while
 - Until ejecuta las instrucciones mientras la expresión es falsa y hasta que sea verdadera.
