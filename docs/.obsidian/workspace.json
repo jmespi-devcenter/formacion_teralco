@@ -26,9 +26,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "c4cc7bb4a21197dc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "APACHE GROOVY.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -94,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SCRIPTING EN BASH.md",
+                "file": "APACHE GROOVY.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SCRIPTING EN BASH.md",
+                "file": "APACHE GROOVY.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SCRIPTING EN BASH.md"
+                "file": "APACHE GROOVY.md"
               }
             }
           }
@@ -155,10 +167,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9dbb3fbb8f1b5191",
+  "active": "c4cc7bb4a21197dc",
   "lastOpenFiles": [
-    "EJERCICIOS SCRIPTING.md",
     "LINUX FORMACIÓN.md",
+    "EJERCICIOS SCRIPTING.md",
+    "APACHE GROOVY.md",
     "SCRIPTING EN BASH.md",
     "Pasted image 20230122195208.png",
     "Pasted image 20230122195256.png",
