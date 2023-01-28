@@ -111,12 +111,48 @@ def multiplicar = ~{factor01, factor02 ->
 
 # - Colecciones de datos
 
-### - Rangos
+### - Rangos 
+- Cualquier clase que implemente una interfaz comparable, así como los métodos *next() y previous()* puede ser usuada como valor de un ranto, Date y String
+
 ### - Listas
+- Colecciones cuyos elementos pueden ser accedidos mediante un índice. Definidas con una relación de valores separados por comas entre corchetes. Instacias de la clase *java.util.list*
+
 ### - Maps
+- Colecciones de valores referenciados por una clave, pareja calve-valor
+
 ### - Métodos
+- Hay un gran número de métodos disponibles para trabajar con Rangos, Listas y Mapas
+- Documentación -> https://groovy-lang.org/gdk.html
+
+**Hay ejemplos de cada una de estas opciones en los scripts de groovy dentro de la carpeta en el proyecto**
+
 
 ## - Estructuras de control
-## - Operadores
 
+- Como en cualquier otro lenguje de programación existen las estructuras de control condicionales, blucles y en este caso también tenemos manejo de excepciones.
+- Tenemos ejemplo de todas las estructuras de control en la carpeta de groovy en el proyecto
+
+	![[Pasted image 20230128102750.png]]
+	
+## - Operadores
+- Existen operadores de varios tipos
+	- Aritméticos
+	- De asignación
+	- Relacionales
+	- Lógicos
+	- Binarios
+	- Condicionales
+	- De objetos
+	- Expresiones regurales
+
+A continuación se dejan algunos de ellos
+![[Pasted image 20230128103657.png]]  ![[Pasted image 20230128103710.png]] ![[Pasted image 20230128103723.png]]![[Pasted image 20230128103738.png]]
+![[Pasted image 20230128103759.png]]
+
+![[Pasted image 20230128103816.png]]
+![[Pasted image 20230128103834.png]]
+![[Pasted image 20230128103841.png]]
+
+
+#COMPLETAR 
 
