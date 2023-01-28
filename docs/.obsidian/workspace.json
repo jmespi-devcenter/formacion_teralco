@@ -57,7 +57,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LINUX FORMACIÓN.md",
+                "file": "JENKINS - INSTALACIÓN.md",
                 "mode": "source",
                 "source": false
               }
@@ -130,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "LINUX FORMACIÓN.md",
+                "file": "JENKINS - INSTALACIÓN.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "LINUX FORMACIÓN.md",
+                "file": "JENKINS - INSTALACIÓN.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "LINUX FORMACIÓN.md"
+                "file": "JENKINS - INSTALACIÓN.md"
               }
             }
           }
@@ -193,10 +193,10 @@
   },
   "active": "e0ea0e8484ce70d1",
   "lastOpenFiles": [
-    "JENKINS - INSTALACIÓN.md",
     "JENKINS - CONFIGURACION.md",
-    "APACHE GROOVY.md",
+    "JENKINS - INSTALACIÓN.md",
     "LINUX FORMACIÓN.md",
+    "APACHE GROOVY.md",
     "SCRIPTING EN BASH.md",
     "EJERCICIOS SCRIPTING.md",
     "img/Pasted image 20230128103759.png",

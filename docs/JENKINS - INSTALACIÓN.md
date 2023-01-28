@@ -347,5 +347,73 @@ Host github.com
 - No olvidar copiar la clave privada en la ruta indicada en IdentityFile y establecerle permisos de archivo 400.
 - Con Host github.com establecemos un alias al host indicado en Hostname, en el ejemplo al dejar los valores igual no establecemos ningún alias. IdentityFile indica la ruta a la clave privada. Con IdentitiesOnly yes cambiamos el comportamiento de SSH, al iniciar una identificación renuncia a establecer la conexión probando primero con la clave privada por defecto, usualmente id_rsa
 
+## - Instalación herramientas adicionales
 
+### - OpenLens
 
+- Software para visualizar de manera gráfica nuestros cluster de kubernetes. Permite cierta gestión de una manera mucho más comoda y rápida.
+
+- Para instalar open lens debemos ir al github de open lens
+https://github.com/MuhammedKalkan/OpenLens
+
+- Una vez allí buscaremos el binario de la última versión estable
+	- Nos dirigimos a assets y descargamos el paquete [OpenLens-6.3.0.amd64.deb](https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.3.0/OpenLens-6.3.0.amd64.deb)
+
+- Una vez descargado el paquete lo instalamos
+
+```shell
+sudo dpkg -i OpenLens-6.3.0.adm64.deb
+```
+
+### - Terminator
+
+- Terminal con mucha más funcionalidad que la terminal tradicional
+- Para instalarlo
+
+```shell
+sudo apt install terminator
+```
+
+- Comandos
+	- Ctrl + Shift + E ->  nueva terminal a la derecha
+	- Ctrl + Shift + O -> nueva terminal debajo
+	- Ctrl + Shift + W -> cerrar terminal
+	- Alt + Flecha dirección -> desplazarse entre terminales
+	- Ctrl + Shift + Flecha dirección -> hacer ese terminal más grande o pequeño
+
+### - Screen
+
+- Utilidad para mandar procesos a segundo plano, esto nos permite poder cerrar terminal e incluso la sesión sin que esos procesos mueran
+
+- Para instalarlo utilizaremos el siguiente comando
+
+```shell
+sudo apt install screen
+```
+
+- Una vez instalado ejecutamos el comnado screen -> comando a mandar a segundo plano -> Ctrl + A + D para enviar el proceso
+
+- Con screen -r vemos los procesos que hay en segundo plano
+- Con screen -r + "id proceso" -> recuperamos este proceso
+
+### - LocalTunnel
+
+- Utilidad que nos permite publicar un puerto de nuestra máquina a internet, para poder instalarla en primer lugar instalaremos npm
+
+- Instalación npm
+
+```shell
+sudo apt install npm
+```
+
+- Desde npm instalamos la utilidad lt
+
+```shell
+sudo npm install -g localtunnel
+```
+
+- Con el siguiente comando publicamos nuestro puerto a internet
+
+```shell
+sudo npm install -g localtunnel
+```
