@@ -147,11 +147,8 @@ def multiplicar = ~{factor01, factor02 ->
 
 A continuación se dejan algunos de ellos
 ![[Pasted image 20230128103657.png]]  ![[Pasted image 20230128103710.png]] ![[Pasted image 20230128103723.png]]![[Pasted image 20230128103738.png]]
-![[Pasted image 20230128103759.png]]
-
-![[Pasted image 20230128103816.png]]
-![[Pasted image 20230128103834.png]]
-![[Pasted image 20230128103841.png]]
+![[Pasted image 20230128103759.png]]  ![[Pasted image 20230128103816.png]]
+![[Pasted image 20230128103834.png]] ![[Pasted image 20230128103841.png]]
 
 
 #COMPLETAR 

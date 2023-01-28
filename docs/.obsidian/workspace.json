@@ -38,9 +38,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "2ae97f7ce10505f0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "JENKINS - INSTALACIÓN.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e0ea0e8484ce70d1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "LINUX FORMACIÓN.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -106,7 +130,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "APACHE GROOVY.md",
+                "file": "LINUX FORMACIÓN.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +147,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "APACHE GROOVY.md",
+                "file": "LINUX FORMACIÓN.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +170,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "APACHE GROOVY.md"
+                "file": "LINUX FORMACIÓN.md"
               }
             }
           }
@@ -167,15 +191,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c4cc7bb4a21197dc",
+  "active": "e0ea0e8484ce70d1",
   "lastOpenFiles": [
-    "LINUX FORMACIÓN.md",
-    "EJERCICIOS SCRIPTING.md",
+    "JENKINS - INSTALACIÓN.md",
+    "JENKINS - CONFIGURACION.md",
     "APACHE GROOVY.md",
+    "LINUX FORMACIÓN.md",
     "SCRIPTING EN BASH.md",
+    "EJERCICIOS SCRIPTING.md",
+    "img/Pasted image 20230128103759.png",
     "Pasted image 20230122195208.png",
     "Pasted image 20230122195256.png",
-    "Pasted image 20230122195349.png",
-    "Pasted image 20230122195820.png"
+    "Pasted image 20230122195349.png"
   ]
 }
