@@ -312,7 +312,21 @@ helm list --namespace jenkins-project
 
 Nuestro jenkins debería estar funcional
 
+- Los pods no resuelven dns (https://github.com/kubernetes/minikube/issues/1340) Troubleshooting
+- Si tuviesemos algún problema para acceder hay que ejecutar el siguiente comando
+
+```shell
+$kubectl edit configmap coredns -n kube-system
+# Cambiar
+forward . /etc/resolv.conf {
+max_concurrent 1000
+}
+# Por
+forward . 8.8.8.8 8.8.4.4
+```
+
 ## - Información Adicional
+
 El problema más pertinaz encontrado ha sido Jenkins process is stuck,  las siguientes recomendaciones han servido de ayuda. 
 
 This error means the Jenkins process is stuck on some command. Some suggestions:

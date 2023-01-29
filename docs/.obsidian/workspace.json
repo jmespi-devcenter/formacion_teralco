@@ -62,9 +62,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "b7e3375426c27cca",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "JENKINS - INSTALACIÓN.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "065efcc81bde2f87",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "JENKINS - CONFIGURACION.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -130,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JENKINS - INSTALACIÓN.md",
+                "file": "JENKINS - CONFIGURACION.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "JENKINS - INSTALACIÓN.md",
+                "file": "JENKINS - CONFIGURACION.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JENKINS - INSTALACIÓN.md"
+                "file": "JENKINS - CONFIGURACION.md"
               }
             }
           }
@@ -191,17 +215,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e0ea0e8484ce70d1",
+  "active": "065efcc81bde2f87",
   "lastOpenFiles": [
-    "JENKINS - CONFIGURACION.md",
     "JENKINS - INSTALACIÓN.md",
     "LINUX FORMACIÓN.md",
-    "APACHE GROOVY.md",
+    "img/Pasted image 20230129161952.png",
+    "JENKINS - CONFIGURACION.md",
+    "contraseñas.md",
     "SCRIPTING EN BASH.md",
+    "JENKINS - CONFIGURACIÓN.md",
+    "APACHE GROOVY.md",
     "EJERCICIOS SCRIPTING.md",
-    "img/Pasted image 20230128103759.png",
-    "Pasted image 20230122195208.png",
-    "Pasted image 20230122195256.png",
-    "Pasted image 20230122195349.png"
+    "img/Pasted image 20230128103759.png"
   ]
 }

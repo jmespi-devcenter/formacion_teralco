@@ -151,5 +151,5 @@ A continuación se dejan algunos de ellos
 ![[Pasted image 20230128103834.png]] ![[Pasted image 20230128103841.png]]
 
 
-#COMPLETAR 
+
 
