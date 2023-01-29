@@ -57,6 +57,27 @@ $JENKINS_HOME/secrets/hudson.util.Secret.
 java -jar jenkins.war ---httpPort=9999
 ```
 
+## - Throubleshooting
+
+- Usaremos los logs del master de Jenkins como fuente de información a la hora de diagnosticar un problema. Una forma sencilla de consultar estos logs es usando la herramienta OpenLens.
+- También podemos iniciar un shell en el nodo master y ejecutar los comandos que nos resulten útiles para diagnosticar.
+- En sistemas Jenkins, es habitual que los volúmenes de datos usados para persistir la configuración, los jobs, etc se queden sin espacio o sin ‘inodos’.
+- ¿Que son inodos en sistemas unix?
+
+```shell
+jorge@ubuntu-vm:~/Documentos/repos/formacion_teralco$ df -i
+S.ficheros     Nodos-i NUsados NLibres NUso% Montado en
+tmpfs           497898    1185  496713    1% /run
+/dev/sda3      2588672  377739 2210933   15% /
+tmpfs           497898     281  497617    1% /dev/shm
+tmpfs           497898       4  497894    1% /run/lock
+tmpfs           497898       1  497897    1% /run/qemu
+/dev/sda2            0       0       0     - /boot/efi
+tmpfs            99579     154   99425    1% /run/user/1000
+```
+
+- Borrado de ficheros temporales. Cuando lanzamos un job, a menudo se descargan las librerías utilizadas para su ejecución. Estas librerías ocupan un espacio en el sistema y son perfectamente prescindibles ya que se volverán a descargar en la próxima ejecución.
+
 # PLUGINS
 
 - Para un correcto funcionamiento de jenkins deberemos instalar complementos adicionales. 
@@ -136,6 +157,7 @@ pipeline {
 	- Configuración en pom.xml y en settings.xml
 - La credencial debe ser añadida a Jenkins Credentials como una credencial de tipo Secret Text
 
+
 ![[Pasted image 20230129172210.png]]
 
 - Desde nuestro pipeline, usaremos la función proporcionada por el plugin ‘withSonarQubeEnv’, indicando el nombre que le dimos a la configuración al darla de alta en Jenkins.
@@ -151,6 +173,31 @@ withSonarQubeEnv('SONAR_DEV') {
 	sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
 }
 ```
+
+## - GitHub Branch Source 
+(https://plugins.jenkins.io/github-branch-source/)
+
+- Escanea automáticamente en busca de nuevos repositorios y/o ramas en los mismos y los incorpora a Jenkis
+
+- Creamos un nuevo item del tipo Multibranch Pipeline
+
+![[Pasted image 20230129180704.png]]
+
+- En la configuración del item, seleccionamos GitHub como origen de las ramas.
+
+![[Pasted image 20230129180733.png]]
+
+- Creamos la credencial necesaria para poder conectar a GitHub.
+
+![[Pasted image 20230129180750.png]]
+
+- En GitHub creamos una App, obtenemos el PAT y lo usamos para crear una credencial de tipo Username with password.
+
+![[Pasted image 20230129180823.png]]
+
+- Incluimos la url del repositorio
+
+![[Pasted image 20230129180837.png]]
 
 # PIPELINES
 
