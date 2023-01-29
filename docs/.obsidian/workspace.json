@@ -79,11 +79,9 @@
             "id": "065efcc81bde2f87",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "JENKINS - CONFIGURACION.md",
-                "mode": "source",
-                "source": false
+                "file": "img/Pasted image 20230129180837.png"
               }
             }
           }
@@ -154,7 +152,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JENKINS - CONFIGURACION.md",
+                "file": "img/Pasted image 20230129180837.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -171,7 +169,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "JENKINS - CONFIGURACION.md",
+                "file": "img/Pasted image 20230129180837.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -194,7 +192,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JENKINS - CONFIGURACION.md"
+                "file": "img/Pasted image 20230129180837.png"
               }
             }
           }
@@ -215,10 +213,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "065efcc81bde2f87",
+  "active": "1dcb3a93569e0656",
   "lastOpenFiles": [
-    "img/Pasted image 20230129163854.png",
     "JENKINS - CONFIGURACION.md",
+    "img/Pasted image 20230129163854.png",
     "JENKINS - INSTALACIÓN.md",
     "LINUX FORMACIÓN.md",
     "img/Pasted image 20230129161952.png",
