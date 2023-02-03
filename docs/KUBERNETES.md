@@ -338,5 +338,26 @@ https://kubernetes.io/docs/concepts/configuration/configmap/
 https://kubernetes.io/docs/concepts/configuration/secret/
 
 
+# COMANDOS KUBECTL Y MINIKUBE
+
+```shell
+- minikube start
+- kubectl version -o yaml
+- kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+- kubectl get all -o wide
+- kubectl describe TIPO_OBJETO NOMBRE_OBJETO
+- kubectl logs NOMBRE_OBJETO
+- kubectl exec --stdin --tty NOMBRE_POD -- /bin/bash
+- kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+- minikube ip
+- kubectl scale deployments/kubernetes-bootcamp --replicas=4
+- kubectl describe deployments/kubernetes-bootcamp
+- kubectl get events
+- minikube dashboard
+- kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+- kubectl rollout undo deployments/kubernetes-bootcamp
+- minikube delete
+```
+
 
 

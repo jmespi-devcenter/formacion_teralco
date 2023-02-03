@@ -101,9 +101,11 @@
             "id": "2abad2e4865ade96",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "img/Pasted image 20230203181122.png"
+                "file": "KUBERNETES.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -174,7 +176,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "img/Pasted image 20230203181122.png",
+                "file": "KUBERNETES.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -191,7 +193,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "img/Pasted image 20230203181122.png",
+                "file": "KUBERNETES.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -214,7 +216,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "img/Pasted image 20230203181122.png"
+                "file": "KUBERNETES.md"
               }
             }
           }
@@ -235,8 +237,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1dcb3a93569e0656",
+  "active": "2abad2e4865ade96",
   "lastOpenFiles": [
+    "img/Pasted image 20230203181122.png",
     "img/Pasted image 20230203182557.png",
     "KUBERNETES.md",
     "JENKINS - INSTALACIÓN.md",
@@ -245,7 +248,6 @@
     "SCRIPTING EN BASH.md",
     "DOCKER.md",
     "passwords.md",
-    "JENKINS - CONFIGURACION.md",
-    "img/Pasted image 20230129180837.png"
+    "JENKINS - CONFIGURACION.md"
   ]
 }
