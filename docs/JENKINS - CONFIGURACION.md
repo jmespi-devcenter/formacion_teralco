@@ -199,8 +199,6 @@ withSonarQubeEnv('SONAR_DEV') {
 
 ![[Pasted image 20230129180837.png]]
 
-# PIPELINES
-
 # SECRETOS
 
 - Mediante el módulo de secretos gestionamos las credenciales para que nuestro Jenkins pueda acceder a los distintos servicios a los que tiene que enviar y recibir información. Generalmente las conexiones se realizan mediante ssh con los distintos servicios.

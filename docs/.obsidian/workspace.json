@@ -79,9 +79,11 @@
             "id": "065efcc81bde2f87",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "img/Pasted image 20230129180837.png"
+                "file": "passwords.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -152,7 +154,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "img/Pasted image 20230129180837.png",
+                "file": "passwords.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -169,7 +171,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "img/Pasted image 20230129180837.png",
+                "file": "passwords.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -192,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "img/Pasted image 20230129180837.png"
+                "file": "passwords.md"
               }
             }
           }
@@ -216,14 +218,14 @@
   "active": "1dcb3a93569e0656",
   "lastOpenFiles": [
     "JENKINS - CONFIGURACION.md",
+    "img/Pasted image 20230129180837.png",
     "img/Pasted image 20230129163854.png",
     "JENKINS - INSTALACIÓN.md",
     "LINUX FORMACIÓN.md",
     "img/Pasted image 20230129161952.png",
-    "contraseñas.md",
+    "passwords.md",
     "SCRIPTING EN BASH.md",
     "JENKINS - CONFIGURACIÓN.md",
-    "APACHE GROOVY.md",
-    "EJERCICIOS SCRIPTING.md"
+    "APACHE GROOVY.md"
   ]
 }
