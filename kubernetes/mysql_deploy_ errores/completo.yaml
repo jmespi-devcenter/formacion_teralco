@@ -1,0 +1,54 @@
+apiVersion: v1
+data:
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_DATABASE: bootcamp
+  MYSQL_PASSWORD: root
+kind: ConfigMap
+metadata:
+  name: datos-mysql-env
+  namespace: default
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deploy
+  labels:
+    app: mysql
+    type: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      type: db
+  template:
+    metadata:
+      labels:
+        app: mysql
+        type: db
+    spec:
+      containers:
+        - name: mysql8028
+          image: mysql:8.0.28
+          ports:
+            - containerPort: 3306
+              name: db-port
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom: null
+              configMapKeyRef:
+                name: datos-mysql-env
+                key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_USER
+              value: jjuan
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: datos-mysql-env
+                  key: MYSQL_DATABASE
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: datos-mysql-env
+                  key: MYSQL_PASSWORD

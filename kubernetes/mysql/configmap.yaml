@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql
+data:
+  my_database: bootcamp
+  my_image: mysql:8.0.28
+  my_sql_username: jorge
+  my_sql_password: jorge

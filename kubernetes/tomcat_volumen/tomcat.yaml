@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat-service
+  labels:
+    app: tomcat
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: tomcat
+    tier: webserver
+  type: NodePort
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tomcat-pv-claim
+  labels:
+    app: tomcat
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-server
+  labels:
+    app: tomcat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat
+      tier: webserver
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tomcat
+        tier: webserver
+    spec:
+      containers:
+      - image: jmabellan/tomcat-vol:v1
+        name: tomcat-server
+        volumeMounts:
+          - name: tomcat-persistent-storage
+            mountPath: /usr/local/tomcat/webapps/
+      volumes:
+      - name: tomcat-persistent-storage
+        persistentVolumeClaim:
+          claimName: tomcat-pv-claim

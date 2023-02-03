@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: teralco-group
+  name: teralco-backend
+  labels:
+    app: teralco-app-back
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: teralco-back
+      tier: webserver-back
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: teralco-back
+        tier: webserver-back
+    spec:
+      containers:
+      - image: jmabellan/apache-back:v1
+        name: teralco-backend-container

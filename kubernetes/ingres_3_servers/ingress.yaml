@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: www.jmabellan.local
+    http:
+      paths:
+      - path: /appt
+        pathType: Prefix
+        backend:
+          service:
+            name: tomcat-service
+            port:
+              number: 8080
+      - path: /appj
+        pathType: Prefix
+        backend:
+          service:
+            name: jetty-service
+            port:
+              number: 8080
+      - path: /appi
+        pathType: Prefix
+        backend:
+          service:
+            name: tomcat-service-2
+            port:
+              number: 8080

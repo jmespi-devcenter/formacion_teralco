@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: teralco-group
+  name: apache-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: www.jmabellan.local
+    http:
+      paths:
+      - path: /front
+        pathType: Prefix
+        backend:
+          service:
+            name: teralco-frontend-service
+            port:
+              number: 80
+      - path: /back
+        pathType: Prefix
+        backend:
+          service:
+            name: teralco-backend-service
+            port:
+              number: 80

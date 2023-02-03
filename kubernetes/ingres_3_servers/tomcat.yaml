@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat-service
+  labels:
+    app: tomcat
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: tomcat
+    tier: webserver
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomcat-server
+  labels:
+    app: tomcat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat
+      tier: webserver
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: tomcat
+        tier: webserver
+    spec:
+      containers:
+      - image: jmabellan/tomcat-web:v2
+        name: tomcat-server

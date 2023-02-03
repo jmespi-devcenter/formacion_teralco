@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jetty-service
+  labels:
+    app: jetty
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: jetty
+    tier: webserver
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jetty-server
+  labels:
+    app: jetty
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jetty
+      tier: webserver
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jetty
+        tier: webserver
+    spec:
+      containers:
+      - image: jmabellan/jetty-web:v1
+        name: jetty-server

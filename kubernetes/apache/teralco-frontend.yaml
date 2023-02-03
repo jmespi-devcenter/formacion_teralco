@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: teralco-group
+  name: teralco-frontend
+  labels:
+    app: teralco-app-front
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: teralco-front
+      tier: webserver-front
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: teralco-front
+        tier: webserver-front
+    spec:
+      containers:
+      - image: jmabellan/apache-front:v1
+        name: teralco-frontend-container
