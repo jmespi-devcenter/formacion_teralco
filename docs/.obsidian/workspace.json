@@ -91,16 +91,24 @@
             "id": "21407c9039742b60",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "KUBERNETES.md",
-                "mode": "source",
-                "source": false
+                "file": "img/Pasted image 20230203165528.png"
+              }
+            }
+          },
+          {
+            "id": "2abad2e4865ade96",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "img/Pasted image 20230203181122.png"
               }
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -166,7 +174,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "KUBERNETES.md",
+                "file": "img/Pasted image 20230203181122.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -183,7 +191,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "KUBERNETES.md",
+                "file": "img/Pasted image 20230203181122.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -206,7 +214,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "KUBERNETES.md"
+                "file": "img/Pasted image 20230203181122.png"
               }
             }
           }
@@ -227,17 +235,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "21407c9039742b60",
+  "active": "1dcb3a93569e0656",
   "lastOpenFiles": [
-    "DOCKER.md",
+    "img/Pasted image 20230203182557.png",
     "KUBERNETES.md",
-    "passwords.md",
-    "JENKINS - CONFIGURACION.md",
-    "img/Pasted image 20230129180837.png",
-    "img/Pasted image 20230129163854.png",
     "JENKINS - INSTALACIÓN.md",
     "LINUX FORMACIÓN.md",
-    "img/Pasted image 20230129161952.png",
-    "SCRIPTING EN BASH.md"
+    "img/Pasted image 20230203165528.png",
+    "SCRIPTING EN BASH.md",
+    "DOCKER.md",
+    "passwords.md",
+    "JENKINS - CONFIGURACION.md",
+    "img/Pasted image 20230129180837.png"
   ]
 }

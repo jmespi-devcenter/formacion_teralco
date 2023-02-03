@@ -178,3 +178,165 @@ https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
 
 https://kubernetes.io/docs/concepts/containers/
 
+# CARGAS DE TRABAJO
+
+## - Pods
+
+- Los Pods son las unidades de computación desplegables más pequeñas que se pueden crear y gestionar en Kubernetes
+
+- Son un grupo de uno o más contenedores, con almacenamiento/red compartidos, y unas especificaciones de cómo ejecutar los contenedores. Modelan un “host lógico”
+
+- Permiten el intercambio de datos y la comunicación entre los contenedores que lo constituyen
+
+- Todas las aplicaciones en un Pod utilizan el mismo namespace de red (la misma IP y puerto) y, por lo tanto, pueden "encontrarse" entre sí y comunicarse utilizando localhost. Debido a esto, las aplicaciones en un Pod deben coordinar su uso de puertos
+
+https://kubernetes.io/docs/concepts/workloads/pods/
+
+## - Pods Lifecycle
+
+- Los Pods se crean, se les asigna un identificador único (UID) y se planifican en nodos donde permanecen hasta su finalización (según la política de reinicio) o supresión.
+	- Si un nodo muere, los Pods programados para ese nodo se programan para su eliminación después de un período de tiempo de espera
+
+- Un Pod dado (definido por su UID) no se "replanifica" a un nuevo nodo; en su lugar, puede reemplazarse por un Pod idéntico, con incluso el mismo nombre si lo desea, pero con un nuevo UID
+
+- La fase en un Pod es un resumen simple y de alto nivel como se encuentra el Pod en su ciclo de vida.
+	- Pending: El clúster de Kubernetes aceptó el Pod, pero uno o más de los contenedores no se configuraron ni prepararon para ejecutarse.
+	- Running: El Pod se ha vinculado a un nodo y se han creado todos los contenedores. Al menos un contenedor todavía se está ejecutando o está en proceso de iniciarse o reiniciarse
+	- Succeeded: Todos los contenedores en el Pod finalizaron correctamente y no se reiniciarán.
+	- Failed: Todos los contenedores en el Pod terminaron y al menos un contenedor terminó con fallo.
+	- Unknown: Por alguna razón no se pudo obtener el estado del Pod. Esta fase generalmente ocurre debido a un error en la comunicación con el nodo donde se debe ejecutar el Pod.
+
+https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/
+
+## - Replicaset
+
+- Su objetivo es el de mantener un conjunto estable de réplicas de Pods ejecutándose en todo momento. Así, se usa en numerosas ocasiones para garantizar la disponibilidad de un número específico de Pods idénticos
+
+- A diferencia del caso en que un usuario crea Pods de forma directa, un ReplicaSet sustituye los Pods que se eliminan o se terminan por la razón que sea, como en el caso de fallo de un nodo o una intervención disruptiva de mantenimiento, como una actualización de kernel. Por esta razón, se recomienda que se use un ReplicaSet incluso cuando la aplicación sólo necesita un único Pod.
+
+- Entiéndelo de forma similar a un proceso supervisor, donde se supervisa múltiples Pods entre múltiples nodos en vez de procesos individuales en un único nodo. Un ReplicaSet delega los reinicios del contenedor local a algún agente del nodo (por ejemplo, Kubelet o Docker)
+
+https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+
+## - Deployments
+
+- Un controlador de Deployment proporciona actualizaciones declarativas para los Pods y los ReplicaSets
+
+- Cuando describes el estado deseado en un objeto Deployment, el controlador del Deployment se encarga de cambiar el estado actual al estado deseado de forma controlada
+
+- Un Deployment es un objeto que puede poseer ReplicaSets y actualizar a estos y a sus Pods. Aunque que los ReplicaSets puede usarse independientemente, hoy en día se usan principalmente a través de los Deployments como el mecanismo para orquestar la creación, eliminación y actualización de los Pods
+
+	![[Pasted image 20230203181122.png]]
+
+https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+
+## - StatefulSet
+- Se usa para gestionar aplicaciones con estado
+
+- Al igual que un Deployment, un StatefulSet gestiona Pods que se basan en una especificación idéntica de contenedor.
+
+- A diferencia de un Deployment, un StatefulSet mantiene una identidad asociada a sus Pods. Estos pods se crean a partir de la misma especificación, pero no pueden intercambiarse; cada uno tiene su propio identificador persistente que mantiene a lo largo de cualquier re-programación
+
+- Los StatefulSets son valiosos para aquellas aplicaciones que necesitan:
+	- Identificadores de red estables, únicos
+	- Almacenamiento estable, persistente
+	- Despliegue y escalado ordenado, controlado
+	- Actualizaciones en línea ordenadas, automatizadas
+
+- Si una aplicación no necesita ningún identificador estable(persistencia entre (re)programaciones de Pods) o despliegue, eliminación, o escalado ordenado, deberías desplegar tu aplicación con un controlador que proporcione un conjunto de réplicas sin estado, como un Deployment o un ReplicaSet, ya que están mejor preparados para tus necesidades sin estado
+
+https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+
+## - DaemonSets
+
+- Un DaemonSet garantiza que todos (o algunos) de los nodos ejecuten una copia de un Pod. Conforme se añade más nodos al clúster, nuevos Pods son añadidos a los mismos. Conforme se elimina nodos del clúster, dichos Pods se destruyen. Al eliminar un DaemonSet se limpian todos los Pods que han sido creados
+
+- Algunos casos de uso típicos de un DaemonSet son:
+	- Ejecutar un proceso de almacenamiento en el clúster
+	- Ejecutar un proceso de recolección de logs en cada nodo
+	- Ejecutar un proceso de monitorización de nodos en cada nodo
+
+https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/
+
+## -Jobs y CronJobs
+
+- Un Job crea uno o más pods y continuará reintentando la ejecución de los pods hasta que un número específico de ellos finalice con éxito. A medida que los pods finalizan con éxito, el Job realiza un seguimiento de las finalizaciones exitosas. Cuando alcanza un número específico de finalizaciones correctas, el Job se completa (finaliza)
+	- Eliminar el Job borrará los pods que creó. Y la suspensión del Job borrará sus pods activos hasta que el trabajo se reanude de nuevo
+
+- Un caso simple es crear un Job para ejecutar de manera confiable un pod hasta su finalización. El Job iniciará un nuevo Pod si el primer Pod falla o se elimina (por ejemplo, debido a un fallo del hardware del nodo o un reinicio del nodo)
+
+- Un CronJob crea Jobs en un horario repetitivo, es como una línea de un archivo crontab. Ejecuta un trabajo periódicamente en un horario determinado, escrito en formato Cron
+
+# SERVICIOS
+
+- Un Servicio enruta el tráfico a través de un conjunto de Pods. Los servicios son la abstracción que permite que los pods mueran y se repliquen en Kubernetes sin afectar a las aplicaciones. El descubrimiento y el enrutamiento entre pods dependientes (como componentes frontend y backend en una aplicación) son manejados por los servicios.
+
+![[Pasted image 20230203182557.png]]
+
+## - Publicar Servicios
+
+- En algunas partes de la aplicación (por ejemplo, frontends) puede que se necesite exponer un Service a una dirección IP externa, que está fuera del clúster local
+
+- Los valores Type y sus comportamientos son:
+	- ClusterIP: Expone el Service en una dirección IP interna del clúster. Al escoger este valor el Service solo es alcanzable desde el clúster. Este es el ServiceType por defecto
+	- NodePort: Expone el Service en cada IP del nodo en un puerto estático (el NodePort)
+	- LoadBalancer: Expone el Service externamente usando el balanceador de carga del proveedor de la nube
+	- ExternalName: Mapea el Service al contenido del campo externalName (ej. foo.bar.example.com), al devolver un registro CNAME con su valor. No se configura ningún tipo de proxy
+
+## - Ingress
+
+- Ingress expone las rutas HTTP y HTTPS desde fuera del clúster a los servicios dentro del clúster. El enrutamiento del tráfico está controlado por reglas definidas en el recurso Ingress
+
+- Se puede configurar un Ingress para dar servicio de direcciones URL accesibles externas, balancear la carga del tráfico, encriptar SSL/TLS y ofrecer alojamiento virtual DNS
+
+- Ingress no es un tipo de Service, pero actúa como el punto de entrada de tu clúster. Te permite consolidar tus reglas de enrutamiento en un único recurso, ya que puede exponer múltiples servicios bajo la misma dirección IP
+
+![[Pasted image 20230203182719.png]]
+
+https://kubernetes.io/docs/concepts/services-networking/ingress/
+
+# ALMACENAMIENTO
+
+## - Volumes
+
+- El uso de volúmenes resuelve principalmente dos problemas:
+	- El primero es la pérdida de archivos cuando el contenedor termina. Kubelet reinicia el contenedor con un estado limpio de nuevo
+	- El segundo ocurre cuando compartimos ficheros entre contenedores corriendo juntos dentro de un Pod
+
+- Kubernetes soporta muchos tipos de volúmenes. Un Pod puede utilizar cualquier número de tipos de volúmenes simultáneamente. Los tipos de volúmenes efímeros tienen el mismo tiempo de vida que un Pod, pero los volúmenes persistentes existen más allá del tiempo de vida de un Pod.
+	 - Cuando un Pod deja de existir, Kubernetes destruye los volúmenes efímeros; sin embargo, Kubernetes no destruye los volúmenes persistentes. Para cualquier tipo de volumen en un Pod dado, los datos son preservados a lo largo de los reinicios del contenedor
+
+- Docker provee también controladores de volúmenes, pero la funcionalidad es algo limitada
+
+https://kubernetes.io/docs/concepts/storage/volumes/
+
+## Persisten volumes
+
+- Un PersistentVolume (PV) es una pieza de almacenamiento en el clúster. Es un recurso en el clúster al igual que un nodo es un recurso de clúster. 
+	- Los PV son complementos de volumen como Volúmenes, pero tienen un ciclo de vida independiente de cualquier Pod individual que use el PV
+
+- Un PersistentVolumeClaim (PVC) es una solicitud de almacenamiento por parte de un usuario. Es similar a un Pod. Los pods consumen recursos de nodos y los PVC consumen recursos de PV. Los pods pueden solicitar niveles específicos de recursos (CPU y memoria). Los claims pueden solicitar modos de acceso y tamaños específicos (por ejemplo, se pueden montar ReadWriteOnce, ReadOnlyMany o ReadWriteMany)
+
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+
+# CONFIGURACIÓN
+
+## - ConfigMaps
+
+- Es un objeto de la API utilizado para almacenar datos no confidenciales en el formato clave-valor Los Pods pueden utilizar los ConfigMaps como variables de entorno, argumentos de la línea de comandos o como ficheros de configuración en un Volumen
+
+- Un ConfigMap te permite desacoplar la configuración de un entorno específico de una imagen de contenedor, así las aplicaciones son fácilmente portables
+
+https://kubernetes.io/docs/concepts/configuration/configmap/
+
+## - Secrets
+
+- Te permiten almacenar y administrar información confidencial, como contraseñas, tokens OAuth y llaves ssh. Poniendo esta información en un Secret es más seguro y más flexible que ponerlo en la definición de un Pod o en un ConfigMap
+
+- Para usar un Secret, un Pod debe hacer referencia a este
+
+https://kubernetes.io/docs/concepts/configuration/secret/
+
+
+
+
