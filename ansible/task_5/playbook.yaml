@@ -1,0 +1,18 @@
+---
+#primera tarea con yaml
+
+- hosts: all
+  become: yes
+  become_method: su
+  tasks:
+  - name: Install open ssh
+    ansible.builtin.apt: 
+      update_cache: yes 
+      name: openssh-server 
+      state: latest
+  - name: Inicializar el servicio
+    ansible.builtin.service:
+      name: ssh
+      state: started
+
+... 

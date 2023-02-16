@@ -1,0 +1,19 @@
+---
+#primera tarea con yaml
+
+- hosts: all
+  become: yes
+  become_method: su
+  tasks:
+  - name: Disable root access ssh
+    ansible.builtin.lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '#PermitRootLogin'
+      line: "PermitRootLogin no"
+      state: present
+  - name: Restart ssh service
+    ansible.builtin.service:
+      name: ssh
+      state: restarted
+
+... 

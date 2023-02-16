@@ -1,0 +1,19 @@
+---
+- hosts: containers 
+  become: yes
+  tasks:
+  - name: Copy folder
+    ansible.builtin.copy:
+      src: /home/bootuser/Documentos/ansible/task_15/practica_2/app
+      dest: /srv/
+  
+  - name: Install phyton pip
+    ansible.builtin.apt:
+      name: python3-pip
+
+  - name: Install requirements
+    ansible.builtin.pip:
+      requirements: /srv/app/requirements.txt
+
+
+# "(cd /; python -mSimpleHTTPServer >/dev/null 2>&1 &)"

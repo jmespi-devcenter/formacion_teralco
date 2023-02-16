@@ -1,0 +1,30 @@
+---
+#primera tarea con yaml
+
+    
+- hosts: all
+  vars:
+    users: 
+      - {name: "dev-user", description: "Usuario de desarrollo", group: "ftp"}
+      - {name: "qa-user", description: "Usuario de calidad", group: "ftp"} 
+  tasks:
+  - name: Copy file
+    apt: 
+      name: vsftpd 
+      state: latest
+    when: inventory_hostname in groups['ftpservers']
+  - name: Create group
+    ansible.builtin.group:
+      name: ftp
+      state: present
+    when: inventory_hostname in groups['ftpservers']
+  - name: Create user
+    ansible.builtin.user:
+      name: "{{ item.name }}"
+      comment: "{{ item.description }}"
+      group: "{{ item.group }}"
+    loop: 
+      "{{ users }}"
+    when: inventory_hostname in groups['ftpservers']
+ 
+...   

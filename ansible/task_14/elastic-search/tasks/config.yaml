@@ -1,0 +1,14 @@
+---
+
+#Enable service
+- name: Enable Service
+  ansible.builtin.command:
+    cmd: systemctl enable elasticsearch.service
+
+#Set config ip
+- name: Set ip
+  ansible.builtin.lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: '^network.host'
+    line: "{{ ip }}"
+...

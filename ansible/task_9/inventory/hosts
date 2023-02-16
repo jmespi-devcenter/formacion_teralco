@@ -1,0 +1,12 @@
+[all]
+ubuntu-server-1
+ubuntu-server-2
+
+[all:vars]
+ansible_connection=docker
+
+[ftpservers]
+ubuntu-server-1
+
+[webservers]
+ubuntu-server-2

@@ -1,0 +1,16 @@
+---
+# tasks file for open-jdk
+
+- name: Alternative version
+  community.general.alternatives:
+    name: java
+    path: "{{ java_route_v11 }}"
+
+
+- name: Ensure the defaul
+  ansible.builtin.lineinfile:
+    path: /etc/environment
+    regexp: '^JAVA_HOME'
+    line: "{{ java_home_v11 }}"
+...
+

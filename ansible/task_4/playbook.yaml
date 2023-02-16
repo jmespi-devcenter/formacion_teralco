@@ -1,0 +1,23 @@
+---
+#primera tarea con yaml
+
+- hosts: all
+
+  tasks:
+  - name: Copy file
+    ansible.builtin.copy:
+      src: /home/bootuser/Documentos/ansible/task_3/file.txt
+      dest: /tmp/
+      mode: '0777'
+  - name: Add line to file
+    ansible.builtin.lineinfile:
+      path: /tmp/file.txt
+      line: "Added a new line"
+  - name: Replace last line
+    ansible.builtin.lineinfile:
+      path: /tmp/file.txt
+      regexp: 'Added a new line'
+      line: "replaced a new line"
+      state: present
+
+... 

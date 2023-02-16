@@ -1,0 +1,16 @@
+---
+#primera tarea con yaml
+
+- hosts: all
+
+  tasks:
+  - name: Create group
+    ansible.builtin.group:
+      name: jorge-group
+      state: present
+  - name: Create user
+    ansible.builtin.user:
+      name: jorge
+      comment: Jorge Molina
+      group: jorge-group
+... 

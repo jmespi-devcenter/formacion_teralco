@@ -1,0 +1,13 @@
+---
+#primera tarea con yaml
+
+- hosts: webservers
+  become: yes
+  become_method: su
+  tasks:
+  - name: Update and Upgrade
+    apt: update_cache=yes upgrade=yes
+  - name: Install Apache
+    apt: name=apache2 state=latest
+
+...

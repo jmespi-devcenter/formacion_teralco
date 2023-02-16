@@ -1,0 +1,14 @@
+---
+# vars file for open-jdk
+#Versiones
+java_openjdk_v11: openjdk-11-jdk-headless
+java_openjdk_v16: openjdk-16-jdk-headless
+
+
+#Variables de entorno
+java_home_v16: JAVA_HOME=/usr/lib/jvm/java-16-openjdk-amd64/bin/
+java_home_v11: JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/bin/
+
+#Route java version
+java_route_v16: /usr/lib/jvm/java-16-openjdk-amd64/bin/
+java_route_v11: /usr/lib/jvm/java-11-openjdk-amd64/bin/

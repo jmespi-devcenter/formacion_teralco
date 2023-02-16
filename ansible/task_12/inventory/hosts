@@ -1,0 +1,16 @@
+[all]
+ubuntu-server-1
+ubuntu-server-2
+
+[all:vars]
+ansible_connection=docker
+
+[izquierda]
+ubuntu-server-1
+
+[derecha]
+ubuntu-server-2
+
+[bootcamp:children]
+izquierda
+derecha

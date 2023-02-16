@@ -1,0 +1,32 @@
+---
+- hosts: containers 
+  connection: local
+  tasks:
+  # - name: Set ip
+  #   ansible.builtin.lineinfile:
+  #     path: /home/bootuser/Documentos/ansible/task_15/inventory/hosts
+  #     regexp: '^[containers]'
+  #     line: 0.0.0.0:2223
+
+  - name: Deploy Image
+    community.docker.docker_image:
+      name: testimage:v1.0
+      build:
+        path: /home/bootuser/Documentos/ansible/task_15/practica_2/docker  
+      source: build 
+
+  - name: Run Container
+    community.docker.docker_container:
+      name: myimage
+      image: testimage:v1.0
+      state: started
+      restart: yes
+      ports:
+        - "8083:8080"
+        - "2223:22"
+...
+
+
+
+
+

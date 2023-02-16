@@ -1,0 +1,43 @@
+---
+- hosts: all
+  vars:
+    users_izq: 
+      - Alvaro
+      - Oscar
+    users_der:
+      - Pedro
+      - Jorge
+      - Jose
+  tasks:
+  - name: Install packages
+    apt:
+      pkg: 
+        - nginx
+      state: present
+      update_cache: true
+  - name: Show versions
+    ansible.builtin.command:
+      cmd: "nginx -v"
+    register: version_info
+    notify: debug
+  - name: Create group
+    ansible.builtin.group:
+      name: "{{ ansible_facts['nodename'] }}"
+      state: present
+  - name: Create users izq
+    ansible.builtin.user:
+      name: "{{ item }}"
+      group: "{{ ansible_facts['nodename'] }}"
+    loop: "{{ users_izq }}"  
+    when: sitio == "izquierda"
+  - name: Create users izq
+    ansible.builtin.user:
+      name: "{{ item }}"
+      group: "{{ ansible_facts['nodename'] }}"
+    loop: "{{ users_der }}"  
+    when: sitio == "derecha"
+  handlers:
+  - name: debug
+    debug:
+      msg: "Version Info: {{ version_info.stderr }}"
+...

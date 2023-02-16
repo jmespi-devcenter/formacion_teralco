@@ -1,0 +1,14 @@
+# Instalar un lista de paquetes sudo, ipcalc, net-tools, glances
+---
+- hosts: all
+  tasks:
+    - name: Instalar paquetes
+      apt:
+        pkg:
+          - sudo
+          - ipcalc
+          - net-tools
+          - glances
+        state: latest
+        update_cache: true
+...

@@ -1,0 +1,5 @@
+# vars file for elastic-search
+ip: 127.0.0.1
+url_download: https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.1/elasticsearch-2.3.1.deb
+package: elasticsearch-2.3.1.deb
+download_route: /tmp

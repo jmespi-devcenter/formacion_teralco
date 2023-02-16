@@ -1,0 +1,19 @@
+---
+# tasks file for elastic-search
+
+#Update and Upgrade repos
+- name: Update and Upgrade
+  apt: update_cache=yes upgrade=yes
+
+#Download package
+- name: Download elastic search
+  ansible.builtin.get_url:
+    url: "{{ url_download }}"
+    dest: /tmp
+    mode: '0440'
+
+#Install package
+- name: Install service
+  ansible.builtin.apt:
+    deb: "{{ download_route }}/{{ package }}"
+...

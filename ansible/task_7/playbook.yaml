@@ -1,0 +1,23 @@
+---
+#primera tarea con yaml
+
+- hosts: all
+  tasks:
+  - name: Copy file
+    ansible.builtin.copy:
+      src: /home/bootuser/Documentos/ansible/task_7/test.sh
+      dest: /tmp/test.sh
+      mode: '0777'  
+  - name: Run shell script
+    ansible.builtin.shell: /tmp/test.sh 
+    register: output
+  - name: Save output
+    local_action:
+      module: copy
+      content: "{{ output }}" 
+      dest: /home/bootuser/Documentos/ansible/task_7/salida_{{ ansible_facts['nodename'] }}.txt
+  - name: Clone Repo
+    ansible.builtin.git:
+      repo: https://github.com/heroku/node-js-sample.git
+      dest: /src/ansible-examples
+...

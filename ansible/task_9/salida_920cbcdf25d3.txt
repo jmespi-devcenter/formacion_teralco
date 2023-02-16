@@ -1,0 +1,1 @@
+{"cmd": "/tmp/test.sh", "stdout": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin", "stderr": "", "rc": 0, "start": "2023-02-14 08:41:54.928389", "end": "2023-02-14 08:41:54.930086", "delta": "0:00:00.001697", "changed": true, "stdout_lines": ["/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"], "stderr_lines": [], "failed": false}

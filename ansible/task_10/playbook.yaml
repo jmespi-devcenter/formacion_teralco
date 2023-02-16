@@ -1,0 +1,56 @@
+---
+#primera tarea con yaml
+# Ejecutar una app NodeJS: En los hosts del grupo webservers, instalar los paquetes npm, 
+# nodejs y git. Mostrar la versión de npm y nodejs. Descargar el repositorio https://github.com/heroku/node-js-sample.git 
+# y ejecutar index.js por el puerto 5000.
+    
+- hosts: webservers
+  vars:
+    packages:
+      - npm
+      - git
+      - nodejs
+  tasks:
+  - name: Install packages
+    apt:
+      pkg: 
+        - "{{ item }}"
+      state: present
+      update_cache: true
+    loop: 
+      "{{ packages }}"
+  # - name: Show versions
+  #   ansible.builtin.command:
+  #     cmd: "{{ item }} --version"
+  #   register: version_info
+  #   loop: 
+  #     "{{ packages }}"
+  # - name: Version Info
+  #   debug:
+  #     msg: "Version Info: {{ version_info }}"
+  #   when: versioninfo is changed
+  #   loop: 
+  #     "{{ packages }}"
+  - name: Clone Repository
+    ansible.builtin.git:
+      repo: https://github.com/heroku/node-js-sample.git
+      dest: /src/ansible-examples
+  - name: Install app
+    ansible.builtin.shell: "npm install"
+    args:
+      chdir: "/src/ansible-examples"
+  - name: Run app  
+    ansible.builtin.shell: "(node index.js > nodesrv.log 2>&1 &)"
+    args:
+      chdir: "/src/ansible-examples"
+  # - name: Open port
+  #   ansible.builtin.wait_for:
+  #     port: 5000
+  #     host: localhost
+  #     timeout: 30
+  #     status: started
+
+
+    
+
+...   
