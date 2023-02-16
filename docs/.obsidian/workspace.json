@@ -8,109 +8,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ec660355990a377c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
-            }
-          },
-          {
-            "id": "9dbb3fbb8f1b5191",
+            "id": "331a500dc30415b7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SCRIPTING EN BASH.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "c4cc7bb4a21197dc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "APACHE GROOVY.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "2ae97f7ce10505f0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "JENKINS - INSTALACIÓN.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e0ea0e8484ce70d1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "JENKINS - INSTALACIÓN.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b7e3375426c27cca",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "JENKINS - INSTALACIÓN.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "065efcc81bde2f87",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "passwords.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "21407c9039742b60",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "img/Pasted image 20230203165528.png"
-              }
-            }
-          },
-          {
-            "id": "2abad2e4865ade96",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "KUBERNETES.md",
+                "file": "TERRAFORM.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ],
-        "currentTab": 8
+        ]
       }
     ],
     "direction": "vertical"
@@ -176,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "KUBERNETES.md",
+                "file": "TERRAFORM.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -193,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "KUBERNETES.md",
+                "file": "TERRAFORM.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -216,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "KUBERNETES.md"
+                "file": "TERRAFORM.md"
               }
             }
           }
@@ -237,15 +146,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "2abad2e4865ade96",
+  "active": "331a500dc30415b7",
   "lastOpenFiles": [
+    "SCRIPTING EN BASH.md",
+    "KUBERNETES.md",
     "img/Pasted image 20230203181122.png",
     "img/Pasted image 20230203182557.png",
-    "KUBERNETES.md",
     "JENKINS - INSTALACIÓN.md",
     "LINUX FORMACIÓN.md",
     "img/Pasted image 20230203165528.png",
-    "SCRIPTING EN BASH.md",
     "DOCKER.md",
     "passwords.md",
     "JENKINS - CONFIGURACION.md"
