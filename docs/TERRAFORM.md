@@ -628,11 +628,133 @@ dynamic "setting" {
 
 # - Funciones
 
+## - Numéricas
+
+- abs(number): obtiene el valor absoluto de un número
+- ceil(number): obtiene el valor entero más cercano, mayor o igual que el número dado. ceil(5)=5; 
+	- ceil(5.1)=6
+- floor(number): obtiene el valor entero más cercano, menor o igual que el número dado. floor(5)=5; 
+	- floor(5.1)=5
+- log(number, base): obtiene el logaritmo en la base indicada.
+- min/max: Obtiene el valor mínimo/máximo de entre sus parámetros. min(2,5,7)=2; max([2,5,7]...)=7
+- parseint(string, base): Convierte a entero una cadena que representa un número entero en la base indicada. parseint(“100”, 10) = 100; parseint(“FF”, 16) = 255
+- pow(base, exp): obtiene la potencia de la base elevada al exponente indicado.
+- signum(number): obtiene el signo de un número. 1 si number > 0, -1 si number < 0, 0 si number==0
+
+## - String
+
+- chomp(string): Elimina los caracteres salto de línea del final de la cadena.
+- format(spec, values): Formatea un string, similar a printf. format("Hello, %s!", "Ander")
+- lower/upper(string): Convierte un string a minúsculas/mayúsculas
+- title(string): Convierte a mayúscula la primera letra de cada palabra. 
+- replace(string, substring, replacement): Busca ocurrencias de la subcadena en la cadena y las sustituye
+- split(separator, string): Crea una lista troceando la cadena con el separador dado.
+- join(glue, list): Crea una cadena uniendo los elementos de la lista con el ‘pegamento’ dado.
+- substr(string, offset, length): Devuelve una subcadena
+- trim(string, str_character_set): Elimina los caracteres indicados del comienzo y del final de la cadena
+- trimprefix(string, prefix): Elimina el prefijo indicado del comienzo de la cadena
+- trimsuffix(string, suffix): Elimina el sufijo indicado del final de la cadena
+- trimspace(string): Elimina cualquier carácter espacio (‘ ‘,\t, \n) del principio y final de la cadena.
+
+## - Colecciones
+
+- coalesce(...): Devuelve el valor del primer argumento que sea distinto de null.
+- concat(list1, list2,..., listN): Concatena todas las listas dadas como parámetros
+- contains(list, value): Devuelve true si la lista dada contiene el valor buscado.
+- distinct(list): Devuelve una lista conteniendo los elementos que son distintos entre si.
+- element(list, index): Devuelve el elemento indicado
+- keys(map): Devuelve una lista conteniendo las keys del map/object dado.
+- values(map): Devuelve una lista conteniendo los valores del map/object dado.
+- length(str/list/map): Devuelve la longitud de la cadena, lista o map dado.
+- lookup(map, key, default): Devuelve el valor del atributo ‘key’ del map o ‘default’ si no existe.
+- merge(map1, map2, ..., mapN): Devuelve un map con la combinación de todos los maps.
+- zipmap(keyslist, valueslist) Devuelve un map con la combinación de las keys y los valores dados
+
+## - Codificación
+
+- base64encode/base64decode(string): Codifica/descodifica un string en base64.
+- csvdecode(string): Decodifica un string formateado en CSV obteniendo una lista de maps.
+- jsonencode/jsondecode(value): Codifica/descodifica un valor de Terraform en JSON.
+- yamlencode/yamldecode(value): Codifica/descodifica un valor de Terraform en YAML.
+- urlencode(string): Aplica codificación URL a la cadena. ej: espacios -> %20
+
+## - Sistemas de ficheros
+
+- abspath(string): Convierte una ruta relativa en una absoluta.
+- dirname(string): Devuelve la ruta al directorio que contiene el fichero indicado como parámetro.
+- pathexpand(path): Sustituye el carácter ~ en el path indicado por parámetro, por el home del usuario.
+- basename(path): Toma como parámetro el path a un fichero y devuelve solo el nombre de este.
+- file(path): Lee el contenido de un fichero y lo devuelve como un string.
+- fileexists(path): Devuelve True si el fichero existe
+- fileset(path, pattern): Devuelve un list con los ficheros que cumplen el patrón. (equivalente ls *.txt)
+- filebase64(path): Lee el contenido de un fichero y lo devuelve codificado en Base64.
+
+## - Fecha y hora
+
+- formatdate(fmt, timestamp): Formatea el timestamp dado con el formato deseado.
+- timeadd(timestamp, duration): Añade una duración (+/-) al timestamp indicado.
+- timestamp(): Obtiene el timestamp del sistema.
+
+## - Criptográficas
+
+- uuid()/uuidv5(): Genera un UUID / UUIDv5
+- bcrypt(string): Genera un hash del string indicado, utilizando el algoritmo Blowfish.
+- md5(string): Genera un hash MD5 del string indicado y lo codifica con dígitos hexadecimales.
+- sha1(string)/sha256(string)/sha512(string): Genera un hash SHA1/256/512 del string indicado y lo codifica con dígitos hexadecimales.
+
+## - Networking
+
+- cidrhost(prefix, host): Obtiene la ip para el host según el prefijo
+	- cidrhost("10.12.112.0/20", 16) = 10.12.112.16
+	- cidrhost("10.12.112.0/20", 268) = 10.12.113.12
+	- cidrhost("10.12.112.0/20", 0) = 10.12.112.0 // Dirección de red
+	- cidrhost("10.12.112.0/20", -1) = 10.12.127.255 // Dirección de broadcast
+- cidrnetmask(prefix): Convierte una ip dada en notación CIDR en una máscara de red.
+	- cidrnetmask("172.16.0.0/12") = 255.240.0.0
+- cidrsubnet:(prefix, newbit, netnum): Calcula la dirección de una subnet.
+	- cidrsubnet("10.1.2.0/24", 4, 15) = 10.1.2.240/28
+	- // con 4 bits se pueden crear 15 subnets; devuelve la ip de la subnet 15.
+
+## - Conversión de tipos
+
+- sensitive(value) / nonsensitive(value): Trata el valor dado como sensitivo/no-sensitivo ocultándolo o mostrándolo en la salida de Terraform.
+- tobool(value) / tonumber(value) / tostring(value): Convierte el argumento a su valor booleano/numérico/string.
+- tolist(value): Convierte el argumento en una lista.
+- toset(value): Convierte el argumento en un set.
+- tomap(value): Convierte el argumento en un map.
+- can(expression): Evalúa la expresión dada, devolviendo true si no encontró errores.
+- try(expr1, expr2,..., exprN): Evalúa las expresiones en orden, devolviendo la primera que no produce errores.
+- defaults(value, default_values):se usan con variables de entrada objetos o colecciones de objetos que incluyen atributos opcionales. Permite establecer valores por defecto para aquellos atributos no informados.
+
 # - Backend
 
+- Define dónde serán almacenados el/los fichero(s) de estado de Terraform.
+- Existen distintos tipos de backends que se configuran en un sub-bloque ‘backend’ dentro del bloque ‘terraform’.
+	- local (por defecto)
+	- remote (Terraform cloud)
+	- azurerm (Azure). Contenedor Blob en una Azure Blob Storage Account 
 
+```shell
+backend "azurerm" {
+ resource_group_name = "StorageAccount-ResourceGroup"
+ storage_account_name = "abcd1234"
+ container_name = "tfstate"
+ key = "prod.terraform.tfstate"
+}
+```
 
+- s3(AWS). Bucket S3
 
+```shell
+
+backend "s3" {
+ bucket = "mybucket"
+ key = "path/to/my/key"
+ region = "us-east-1"
+}
+```
+
+- gcs (GCP). Bucket google
 
 
 
